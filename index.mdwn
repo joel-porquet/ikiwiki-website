@@ -1,5 +1,7 @@
 Welcome page.
 
+This wiki has a [[sandbox]].
+
 ----
 
 This wiki is powered by [ikiwiki](http://ikiwiki.info).
