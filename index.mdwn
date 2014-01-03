@@ -1,1 +1,5 @@
 Welcome page.
+
+----
+
+This wiki is powered by [ikiwiki](http://ikiwiki.info).
