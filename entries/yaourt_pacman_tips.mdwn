@@ -1,0 +1,6 @@
+[[!meta title="Yaourt/Pacman Tips"]]
+[[!tags hacking/archlinux]]
+
+## Mark a package as explicitly installed
+
+    # pacman/yaourt -D --asexplicit [pkgname]
