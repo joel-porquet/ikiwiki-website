@@ -1,7 +1,5 @@
-Welcome page.
-
-This wiki has a [[sandbox]].
+Except where otherwise specified, content of this website is published by [Joël Porquet](entries/about_me.mdwn) and is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 ----
 
-This wiki is powered by [ikiwiki](http://ikiwiki.info).
+This website is powered by [ikiwiki](http://ikiwiki.info).
