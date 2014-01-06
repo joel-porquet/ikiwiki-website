@@ -1,4 +1,4 @@
-Except where otherwise specified, content of this website is published by [Joël Porquet](entries/about_me.mdwn) and is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+Except where otherwise specified, content of this website is published by [Joël Porquet](entries/about_me) and is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 ----
 
