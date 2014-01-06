@@ -1,0 +1,4 @@
+[[!meta title="pages tagged hacking"]]
+
+[[!inline pages="tagged(hacking)" actions="no" archive="yes"
+feedshow=10]]
