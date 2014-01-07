@@ -1,0 +1,5 @@
+[[!meta title="Most recently modified pages"]]
+
+Here is a list of recently modified pages:
+
+[[!inline pages="hacking/* or work/* or teaching/* or personal/*" actions="no" archives="yes" sort="mtime" show="20"]]
