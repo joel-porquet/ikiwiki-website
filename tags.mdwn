@@ -1,0 +1,5 @@
+[[!meta title="Tag cloud"]]
+
+Here is a tag cloud for this website:
+
+[[!pagestats pages="tags/*"]]
