@@ -4,12 +4,16 @@ I'm currently a **Postdoctoral research assistant** at [UPMC](http://www.upmc.fr
 
 **Address:**
 
-> UPMC/LIP6
-> BC 167
-> 4 place Jussieu
-> 75252 Paris cedex 05
-> France
+    UPMC/LIP6
+    BC 167
+    4 place Jussieu
+    75252 Paris cedex 05
+    France
 
-**Telephone:** +33 (0)1 44 27 70 17
+**Telephone:**
 
-**Email:** joel.porquet@lip6.fr
+    +33 (0)1 44 27 70 17
+
+**Email:**
+
+    joel.porquet@lip6.fr
