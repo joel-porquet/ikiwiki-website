@@ -1,6 +1,6 @@
-# Dr. Joël Porquet
+[[!meta title="Dr. Joël Porquet"]]
 
-## Current situation and contact information (May 2013 - present)
+# Current situation and contact information (May 2013 - present)
 
 I'm a **Postdoctoral research assistant** at [UPMC](http://www.upmc.fr/en) (Université Pierre et Marie Curie - Paris 6) within the [LIP6](http://www.lip6.fr/?LANG=en) (Laboratoire d'Informatique de Paris 6).
 
@@ -15,10 +15,6 @@ France
 
 **Email:** joel.porquet@lip6.fr
 
-## Last created/modified pages:
+# Last created/modified pages
 
-[[!inline pages="* and !index" actions="no" archive="yes" show=10]]
-
----
-
-This website is powered by [ikiwiki](http://ikiwiki.info).
+[[!inline pages="./*/*" show="10" actions="no" archive="yes"]]
