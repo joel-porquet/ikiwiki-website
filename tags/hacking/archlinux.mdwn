@@ -1,4 +1,0 @@
-[[!meta title="pages tagged hacking/archlinux"]]
-
-[[!inline pages="tagged(hacking/archlinux)" actions="no" archive="yes"
-feedshow=10]]

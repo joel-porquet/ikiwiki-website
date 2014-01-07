@@ -1,1 +1,6 @@
-[[!map pages="views/*"]]
+[[hacking]]
+[[work]]
+[[teaching]]
+[[personal]]
+---
+[[tags]]
