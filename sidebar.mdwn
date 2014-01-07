@@ -1,6 +1,8 @@
-[[hacking]]
-[[work]]
-[[teaching]]
-[[personal]]
+* [[hacking]]
+* [[work]]
+* [[teaching]]
+* [[personal]]
+
 ---
-[[tags]]
+
+* [[tags]]
