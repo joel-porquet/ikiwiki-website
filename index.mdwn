@@ -1,20 +1,15 @@
 [[!meta title="Dr. Joël Porquet"]]
 
-# Current situation and contact information (May 2013 - present)
-
-I'm a **Postdoctoral research assistant** at [UPMC](http://www.upmc.fr/en) (Université Pierre et Marie Curie - Paris 6) within the [LIP6](http://www.lip6.fr/?LANG=en) (Laboratoire d'Informatique de Paris 6).
+I'm currently a **Postdoctoral research assistant** at [UPMC](http://www.upmc.fr/en) (Université Pierre et Marie Curie - Paris 6) within the [LIP6](http://www.lip6.fr/?LANG=en) (Laboratoire d'Informatique de Paris 6).
 
 **Address:**
-UPMC/LIP6
-BC 167
-4 place Jussieu
-75252 Paris cedex 05
-France
+
+> UPMC/LIP6
+> BC 167
+> 4 place Jussieu
+> 75252 Paris cedex 05
+> France
 
 **Telephone:** +33 (0)1 44 27 70 17
 
 **Email:** joel.porquet@lip6.fr
-
-# Last created/modified pages
-
-[[!inline pages="page(./*/*)" show="10" actions="no" archive="yes" sort="mtime"]]
