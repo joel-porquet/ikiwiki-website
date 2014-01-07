@@ -17,4 +17,4 @@ France
 
 # Last created/modified pages
 
-[[!inline pages="pages(./*/*)" show="10" actions="no" archive="yes" sort="mtime"]]
+[[!inline pages="page(./*/*)" show="10" actions="no" archive="yes" sort="mtime"]]
