@@ -1,7 +1,9 @@
 [[!meta title="Various hacking stuff"]]
 
-The best way to browse this category is through the tag cloud or the full list below.
+The best way to browse this category is through the tag cloud:
 
 [[!pagestats pages="tags/*" among="hacking/*"]]
+
+Or the full list of pages:
 
 [[!inline pages="hacking/*" actions="no" archive="yes"]]
