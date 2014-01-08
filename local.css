@@ -21,9 +21,3 @@ body {
     color: #777;
     border-top-color: #e5e5e5;
 }
-
-/* restore the picture in the searchbox (removed by bootstrap) */
-input#searchbox {
-    background: url(wikiicons/search-bg.gif) no-repeat;
-    background-position: 100% 50%;
-}
