@@ -1,9 +1,0 @@
-* [[hacking]]
-* [[work]]
-* [[teaching]]
-* [[personal]]
-
----
-
-* [[tags]]
-* [[timeline]]
