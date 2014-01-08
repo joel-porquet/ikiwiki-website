@@ -9,7 +9,7 @@ work](work/resume).
 If you really want to, you can contact me at `joel.porquet@gmail.com` or
 `joel.porquet@lip6.fr`.
 
-Otherwise, you can just enjoy browsing this website using the sidebar on the
-right. Additionally to being classified into categories, the pages are also
+Otherwise, you can just enjoy browsing this website using the navigation bar
+above. Additionally to being classified into categories, the pages are also
 accessible through [[tags]] and there is a [[timeline]] that shows the most
 recently created/modified pages.
