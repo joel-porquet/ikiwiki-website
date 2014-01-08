@@ -1,0 +1,29 @@
+/* add padding to body because of navbar */
+body {
+    padding-top: 50px;
+}
+
+/* remove margin and padding to copyright and license stubs */
+.pagelicense,
+.pagecopyright p {
+    margin: 0;
+    padding: 0;
+}
+
+/* I don't want a floating tag cloud */
+.pagecloud {
+    float: none;
+    width: 100%;
+}
+
+/* change a bit the footer: gray text and light gray border */
+#pageinfo {
+    color: #777;
+    border-top-color: #e5e5e5;
+}
+
+/* restore the picture in the searchbox (removed by bootstrap) */
+input#searchbox {
+    background: url(wikiicons/search-bg.gif) no-repeat;
+    background-position: 100% 50%;
+}
