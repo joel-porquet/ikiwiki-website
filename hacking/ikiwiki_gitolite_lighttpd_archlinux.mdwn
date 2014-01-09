@@ -15,7 +15,7 @@ Start by installing ikiwiki.
 unfortunately at the moment, but the `PKGBUILD` can be tweaked to get the
 latest version).*
 
-Add a system user named `ikiwiki`. It allows to have a clear separation between
+Add a system user named `ikiwiki`. It helps making a clear separation between
 the `http` user that serves the web pages (through lighttpd) and the `git` user
 that manages gitolite repositories.
 
@@ -27,24 +27,24 @@ creates a user named `ikiwiki` with the following properties:
 
 * it is a system user,
 * its primary group is `ikiwiki` (`-g` option),
-* its secondary group is `git` (`-G`), so that it can later access the
+* its secondary group is `git` (`-G`option ), so that it can later access the
   corresponding git repository managed by gitolite,
-* and finally which has a home directory located in `/srv/ikiwiki` (with
+* and finally it has a home directory located in `/srv/ikiwiki` (with
   archlinux, services such as gitolite, lighttpd, etc. have their so-called
   home directory in `/srv/`).
 
 # Create a first ikiwiki instance
 
-Before including git in the picture, start by creating a ikiwiki instance which
-can already be put on the web. For that, two directories are required:
+Before integrating git in the process, start by creating a ikiwiki instance
+which can already be put on the web. For that, two directories are required:
 
 * the source of the wiki instance (which will contain the markdown source files)
-* the html output (which is displayed by the webserver)
+* the html output (which will be displayed by the webserver)
 
 **Note: from now on, commands prefixed by `$` must be executed by the ikiwiki
 user. Basically, run those commands with `sudo -u ikiwiki`.**
 
-Create those directories:
+Create these directories:
 
     $ mkdir /srv/ikiwiki/wiki.src
     $ mkdir /srv/ikiwiki/wiki.http
@@ -58,7 +58,7 @@ Run the `ikiwiki` command to dump an almost empty setup file (in
 
     $ ikiwiki /srv/ikiwiki/wiki.src /srv/ikiwiki/wiki.http --dumpsetup /srv/ikiwiki/wiki.setup
 
-Edit and tune the setup file to define (at least the following options):
+Edit and tune the setup file to define (at least) the following options:
 
 * `wikiname`
 * `url`
@@ -92,7 +92,7 @@ repository to the ikiwiki user. In `conf/gitolite.conf`:
     repo    wiki
         RW+ = ikiwiki
 
-Copy ikiwiki's public key in `keydir/ikiwiki.pub`. It's likely that the
+Copy ikiwiki's public key in `keydir/ikiwiki.pub`. It is likely that the
 permissions of the key need to be corrected. Before committing and pushing in
 gitolite, make sure the `UMASK` for in `gitolite.rc` is equal to `027`. It
 means the git repositories are accessible by users belonging to the `git` group
@@ -141,7 +141,7 @@ Relaunch ikiwiki to generate the hook:
 
     $ ikiwiki --setup /srv/ikiwiki/wiki.setup
 
-For the hook to be automatically called, and regenerate the html output
+For the hook to be automatically called, and to regenerate the html output
 accordingly, it must be linked to the bare git repository that is under
 gitolite management:
 
