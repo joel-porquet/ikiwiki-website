@@ -1,5 +1,5 @@
-[[!meta title="About"]]
+[[!meta title="About this website"]]
 
-This website is powered by the following (really incomplete) list of free softwares: [ikiwiki](http://ikiwiki.info/), [git](http://git-scm.com/), [vim](http://www.vim.org/), [archlinux](https://www.archlinux.org/).
+This website is powered by the following (definitely incomplete) list of free softwares: [ikiwiki](http://ikiwiki.info/), [git](http://git-scm.com/), [vim](http://www.vim.org/), [lighttpd](http://www.lighttpd.net/), [archlinux](https://www.archlinux.org/).
 
-Its design relies on [bootstrap](http://getbootstrap.com/) that in turn uses [jquery](http://jquery.com/). Some icons come from [font awesome](http://fontawesome.io/).
+Its design relies on [bootstrap](http://getbootstrap.com/) that in turn uses [jquery](http://jquery.com/). Some of the icons come from [font awesome](http://fontawesome.io/).
