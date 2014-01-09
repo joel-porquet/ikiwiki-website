@@ -1,15 +1,15 @@
 [[!meta title="Dr. Joël Porquet"]]
 
-I'm currently a **Postdoctoral research assistant** at
+Since May 2013, I've been working as a **Postdoctoral research assistant** at
 [UPMC](http://www.upmc.fr/en) (Université Pierre et Marie Curie - Paris 6)
 within the [LIP6](http://www.lip6.fr/?LANG=en) (Laboratoire d'Informatique de
-Paris 6). More about my [current work](work/portage_linux_tsar) and my [past
-work](work/resume).
+Paris 6). More about my [current work](work/portage_linux_tsar) and my [full
+resume](work/resume).
 
 If you really want to, you can contact me at `joel.porquet@gmail.com` or
 `joel.porquet@lip6.fr`.
 
 Otherwise, you can just enjoy browsing this website using the navigation bar
-above. Additionally to being classified into categories, the pages are also
-accessible through [[tags]] and there is a [[timeline]] that shows the most
-recently created/modified pages.
+above. Additionally to being classified into primary categories, most of the
+pages are also accessible through [[tags]] and there is a [[timeline]] that
+shows the most recently created/modified pages.
