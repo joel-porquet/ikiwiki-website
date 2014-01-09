@@ -1,0 +1,4 @@
+[[!meta title="pages tagged gitolite"]]
+
+[[!inline pages="tagged(gitolite)" actions="no" archive="yes"
+feedshow=10]]
