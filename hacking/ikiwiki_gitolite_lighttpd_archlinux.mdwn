@@ -24,6 +24,7 @@ that manages gitolite repositories.
 
 The first command creates a system group called `ikiwiki`. The second command
 creates a user named `ikiwiki` with the following properties:
+
 * it is a system user,
 * its primary group is `ikiwiki` (`-g` option),
 * its secondary group is `git` (`-G`), so that it can later access the
