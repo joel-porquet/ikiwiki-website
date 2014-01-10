@@ -1,4 +1,5 @@
 [[!meta title="How to make cgit play well with gitolite"]]
+[[!tag cgit gitolite lighttpd archlinux]]
 
 Configuring cgit on lighttpd/archlinux is a bit of a pain, and even so when
 coupled to gitolite. Fortunately, it is possible to setup a clean configuration
