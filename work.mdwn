@@ -10,83 +10,63 @@
 
 
 *   **2002 - 2005**: University of Pierre and Marie Curie
-    ([UPMC](http://www.upmc.fr/en)), Paris, France
-
-    Master and Bachelor degrees in Computer Science
-
-    Specialization in *Architecture and Design of Integrated Systems*
-
+    ([UPMC](http://www.upmc.fr/en)), Paris, France<br />
+    Master and Bachelor degrees in Computer Science<br />
+    Specialization in *Architecture and Design of Integrated Systems*<br />
     *First class honours ("mention très bien")*
 
 # Professional/research experiences
 
 *   **2013 - present**: University of Pierre and Marie Curie
-    ([UPMC](http://www.upmc.fr/en)), Paris, France
-
-    Postdoctoral research assistant
-
-    [Porting Linux on the TSAR processor architecture](work/linux_tsar_porting)
-
+    ([UPMC](http://www.upmc.fr/en)), Paris, France<br />
+    Postdoctoral research assistant<br />
+    [Porting Linux on the TSAR processor architecture](work/linux_tsar_porting)<br />
     Advised by Prof. Alain Greiner ([link](http://www-soc.lip6.fr/~alain/))
 
 
 *   **2011 - 2012**: Columbia University ([CU](http://www.columbia.edu/)), New
-    York City, USA
-
-    Postdoctoral research assistant
-
+    York City, USA<br />
+    Postdoctoral research assistant<br />
     [Dynamic Information Flow Tracking in Heterogeneous
-    Processors](work/postdoc_columbia)
-
+    Processors](work/postdoc_columbia)<br />
     Advised by Prof. Simha Sethumadhavan
     ([link](http://www.cs.columbia.edu/~simha))
 
 
 *   **2010 - 2011**: University of Pierre and Marie Curie
-    ([UPMC](http://www.upmc.fr/en)), Paris, France
-
-    Research and teaching assistant
-
+    ([UPMC](http://www.upmc.fr/en)), Paris, France<br />
+    Research and teaching assistant<br />
     Finished writing my Ph.D. [thesis](work/phd) and did ~200 hours of
     [[teaching]]
 
 
-*   **2007 - 2010**: STMicroelectronics, Rousset, France
-
-    Embedded systems R&D engineer and Ph.D. candidate
-
+*   **2007 - 2010**: STMicroelectronics, Rousset, France<br />
+    Embedded systems R&D engineer and Ph.D. candidate<br />
     [Dynamic security architecture for multiprocessor
     systems-on-chip](work/phd)
 
 
-*   **2006**: Thalès Communication, Colombes, France
-
-    Intern
-
+*   **2006**: Thalès Communication, Colombes, France<br />
+    Intern<br />
     Parallelization and deployment of a H.264 video decoder on a multiprocessor
     virtual system-on-chip prototype using [SoCLib](http://www.soclib.fr)
     SystemC simulation framework
 
 
 *   **2005 - 2006**: Indian Institute of Technology Delhi
-    ([IITD](http://www.iitd.ac.in/)), New Delhi, India
-
-    Research intern
-
+    ([IITD](http://www.iitd.ac.in/)), New Delhi, India<br />
+    Research intern<br />
     Development of a bipartitioning tool for FPGA placed and routed modules, in
     order to solve the fragmentation issue in the case of partial dynamic
-    reconfiguration
-
+    reconfiguration<br />
     Advised by Prof. Kolin Paul ([link](http://www.cse.iitd.ac.in/kolin/))
 
 
 *   **2005**: University of Pierre and Marie Curie
-    ([UPMC](http://www.upmc.fr/en)), Paris, France
-
-    Research intern (master's thesis)
-
+    ([UPMC](http://www.upmc.fr/en)), Paris, France<br />
+    Research intern (master's thesis)<br />
     Development of a superscalar processor simulation model using
-    [SoCLib](http://www.soclib.fr) SystemC simulation framework
+    [SoCLib](http://www.soclib.fr) SystemC simulation framework<br />
 
 # Publications
 
