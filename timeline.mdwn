@@ -2,4 +2,4 @@
 
 Here is a list of recently modified pages:
 
-[[!inline pages="hacking/* or work/* or teaching/* or personal/*" actions="no" archive="yes" sort="mtime" show="20"]]
+[[!inline pages="hacking* or work* or teaching* or personal*" actions="no" archive="yes" sort="mtime" show="20"]]
