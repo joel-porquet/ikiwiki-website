@@ -5,28 +5,25 @@
 *   Joël Porquet and Simha Sethumadhavan<br />
     **WHISK: An Uncore Architecture for Dynamic Information Flow Tracking in
     Heterogeneous Embedded SoCs**<br />
-    In the proceedings of the *International Conference on Hardware/Software
-    Codesign and System Synthesis*, 2013 (CODES+ISSS'2013)<br />
+    *International Conference on Hardware/Software Codesign and System
+    Synthesis*, 2013 (CODES+ISSS'2013)<br />
     [pdf](http://www.cs.columbia.edu/~simha/preprint_codes13.pdf)
 
 *   Joël Porquet, Alain Greiner and Christian Schwarz<br />
     **NoC-MPU: a secure architecture for flexible co-hosting on shared memory
     MPSoCs**<br />
-    In the proceedings of the *Conference on Design, Automation and Test in
-    Europe*, 2011 (DATE'2011)<br />
+    *Conference on Design, Automation and Test in Europe*, 2011 (DATE'2011)<br />
     (Interactive Presentation)<br />
     [pdf](ftp://asim.lip6.fr/pub/reports/2011/ar.porqu.date.1.2011.pdf)
 
 *   Joël Porquet, Christian Schwarz and Alain Greiner<br />
     **Multi-compartment: a new architecture for secure co-hosting on SoC**<br />
-    In the proceedings of the *11th International Symposium on System-on-Chip*,
-    2009 (SoC'09)<br />
+    *11th International Symposium on System-on-Chip*, 2009 (SoC'09)<br />
     [pdf](ftp://asim.lip6.fr/pub/reports/2009/ar.porqu.soc.1.2009.pdf)
 
 *   Kolin Paul and Joël Porquet<br />
-    **Silicon Compaction/Defragmentation for Partial Runtime Reconfiguration**
-    In the proceedings of the *10th Euromicro Conference on Digital System
-    Design*, 2007 (DSD'07)<br />
+    **Silicon Compaction/Defragmentation for Partial Runtime Reconfiguration**<br />
+    *10th Euromicro Conference on Digital System Design*, 2007 (DSD'07)<br />
     [pdf](ftp://asim.lip6.fr/pub/reports/2007/ar.paul.dsd.1.2007.pdf)
 
 # International patents
