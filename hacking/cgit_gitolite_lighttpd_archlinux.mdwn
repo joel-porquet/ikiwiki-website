@@ -1,0 +1,201 @@
+[[!meta title="How to make cgit play well with gitolite"]]
+
+Configuring cgit on lighttpd/archlinux is a bit of a pain, and even so when
+coupled to gitolite. Fortunately, it is possible to setup a clean configuration
+without making the git repositories public (which most of the tutorials out
+there end up doing).
+
+# Cgit
+
+Start by installing cgit. On archlinux, the web part of it gets installed in
+`/usr/share/webapps/cgit`.
+
+Create a configuration file containing (at least) the following options:
+
+    # set correct urls for resources
+    css=/cgit/cgit.css
+    logo=/cgit/cgit.png
+
+    # where to find the git repos
+    project-list=/srv/git/projects.list
+    scan-path=/srv/git/repositories
+
+A few more options can also be interesting, such as source code highlighting or
+`gitweb` options usage.
+
+**Be careful that additional options must be set before `scan-path` otherwise
+they will not have any effect!**
+
+## Source code highlighting
+
+Install the package highlight.
+
+Then edit the file `/usr/lib/cgit/filters/syntax-highlighting.sh`, comment the
+command referring to `version 2` and uncomment the command referring to
+`version 3` (on archlinux, the version of highlight is the version 3), as shown
+below. Add the `--inline-css` option so highlight will embed coloring
+information directly in its output and it will not be necessary to modify any
+css by hand.
+
+    # This is for version 2
+    #exec highlight --force -f -I -X -S "$EXTENSION" 2>/dev/null
+
+    # This is for version 3
+    exec highlight --force --inline-css -f -I -O xhtml -S "$EXTENSION" 2>/dev/null
+
+Finally, add the following option to `/etc/cgitrc`:
+
+    # Highlight source code
+    source-filter=/usr/lib/cgit/filters/syntax-highlighting.sh
+
+More on [this](https://wiki.archlinux.org/index.php/Cgit#Syntax_highlighting).
+
+## Misc
+
+Other options in `/etc/cgitrc` that can be interesting to define:
+
+    # set title and description
+    root-title=Your title
+    root-desc=Your description
+
+    # Show extra links for each repository on the index page
+    enable-index-links=1
+
+    # Enable ASCII art commit history graph on the log pages
+    enable-commit-graph=1
+
+    # Show number of affected files per commit on the log pages
+    enable-log-filecount=1
+
+    # Show number of added/removed lines per commit on the log pages
+    enable-log-linecount=1
+
+    # Allow using gitweb.* keys
+    enable-git-config=1
+
+# Lighttpd configuration
+
+Define (at least) the following modules in the configuration of lighttpd:
+
+* `mod_alias`: to modify the document root in a clean manner
+* `mod_cgi`: to be able to execute `cgit.cgi`
+* `mod_rewrite`: to create nice permalinks, such as `cgit.cgi/wiki.git/tree/`
+  instead of `cgit.cgi?url=wiki.git/tree
+
+And add the following configuration to serve cgit:
+
+    #
+    # CGIT
+    #
+
+    var.cgit_url = "/cgit"
+    var.cgit_path = "/usr/share/webapps/cgit"
+
+    # cgit rule
+    $HTTP["url"] =~ cgit_url + "(|/.*)" {
+        # use this path instead of the normal document-root
+        alias.url += ( cgit_url => cgit_path )
+        # make cgit.cgi be the index file
+        index-file.names = ( "cgit.cgi" )
+        # make the cgi executable
+        cgi.assign = ( "cgit.cgi" => "" )
+        # nice permalinks
+        url.rewrite-once = (
+            "^/([^?/]+/[^?]*)?(?:\?(.*))?$" => "/cgit.cgi?url=$1&$2",
+        )
+    }
+
+Reload lighttpd and try going to `http://yoururl/cgit/`. It should now serve
+cgit properly although no repository are accessible yet.
+
+# Gitolite configuration
+
+Gitolite configuration might be the trickiest, but it is definitely doable in a
+pretty clean manner.
+
+## Dealing with permissions
+
+By default, on archlinux, gitolite's home is located in `/srv/git/` and all git
+repositories there are defined as belonging to `git:git` but only the user
+`git` has access to them. It is due to the value of `$UMASK` in `.gitolite.rc`.
+
+Most of the tutorials on the Internet recommend setting `$UMASK` to a more
+permissive value (read/execute for everybody, or at least for the `git` group)
+and changing existing repositories to these permissions as well (because
+gitolite is unable to change the permissions of an already created repository).
+
+But it is actually possible to make only the repositories that are exported to
+cgit accessible to the `git` group and not all of them. For that, edit
+`conf/gitolite.conf` of the gitolite admin repository, and assuming an already
+existing repo called `wiki` will be exported to cgit modify the file as
+follows:
+
+    # existing wiki repository
+    repo    wiki
+        RW+ = ikiwiki
+        # make it accessible to the `git` group
+        config core.sharedRepository = true
+
+Make sure to set `$GIT_CONFIG_KEYS` in `.gitolite.rc` to an appropriate value
+(e.g. `'.*'` which is the most permissive), so the `config
+core.sharedRepository` key gets properly evaluated.
+
+Setting this key for new repositories will automatically force gitolite to
+create directories accessible by members of the `git` group. For an already
+existing repository, the corresponding directory must be updated by hand as
+well:
+
+    $ sudo chown -R git:git /srv/git/repositories/wiki.git
+
+Commit and push the modified configuration file to gitolite.
+
+Cgit's cgi script will be executed as part of lighttpd, thus as the user
+`http`. This user must be part of the group `git` in order to have access to
+the git directories. So add the http user to the `git` group:
+
+    $ sudo usermod -a -G git http
+
+## Export some repositories to cgit
+
+The configuration of cgit shown above defines that the git repositories cgit
+has access to is specified in the file `/srv/git/projects.list`.
+
+Gitolite is actually able to create this file automatically. For that, edit
+again the file `conf/gitolite.conf` of the gitolite admin repository, and again
+assuming an already existing repo called `wiki` will be exported to cgit modify
+the file as follows:
+
+    # exported in projects.list
+    @web = wiki
+    repo @web
+        R = gitweb
+
+The user `gitweb` has a special meaning to gitolite, which is specifying to
+gitolite that this repository should be listed in `/srv/git/projects.list`.
+
+Unfortunately, at the moment, when creating the file `/srv/git/projects.list`
+gitolite makes it only accessible to the `git` user. Its ownership must be
+changed by hand to allow members of the `git` group (i.e. http user) to gain
+access to it as well:
+
+    $ sudo chown git:git /srv/git/projects.list
+
+Fortunately, a
+[bug](https://github.com/sitaramc/gitolite/commit/2515992d8836b2fe333860ad0ed3267efd1cf698)
+was fixed recently in gitolite so that gitolite "honor the perms for that file
+if it already exists [which] allows the admin to manually loosen its perms just
+once and forget about it after that."
+
+After committing and pushing the modified configuration file to gitolite, going
+to cgit's web interface should show the exported repositories.
+
+## Further configuration
+
+Additional keys can be added to `conf/gitolite.conf` to give more information
+about exported repositories:
+
+    repo    wiki
+        RW+ = ikiwiki
+        # more information for cgit to nicely display
+        config gitweb.owner = My Name
+        config gitweb.description = Source repository wiki
