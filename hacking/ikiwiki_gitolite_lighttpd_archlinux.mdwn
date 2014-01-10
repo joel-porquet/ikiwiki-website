@@ -26,12 +26,9 @@ The first command creates a system group called `ikiwiki`. The second command
 creates a user named `ikiwiki` with the following properties:
 
 * it is a system user,
-
 * its primary group is `ikiwiki` (`-g` option),
-
 * its secondary group is `git` (`-G` option), so that it can later access the
   corresponding git repository managed by gitolite,
-
 * and finally it has a home directory located in `/srv/ikiwiki` (with
   archlinux, services such as gitolite, lighttpd, etc. have their so-called
   home directory in `/srv/`).
@@ -104,14 +101,15 @@ the repository. Basically, the repository should be accessible by users
 belonging to the `git` group, which is the case of the `ikiwiki` user as
 created above. Two solutions, respectively a global and a local one:
 
-* Either set the `UMASK` in `.gitolite.rc` to `027`. It means that from now on
-  all the git repositories that gitolite creates will be accessible by users
+* Either set `$UMASK` in `.gitolite.rc` to `027`. It means that from now on all
+  the git repositories that gitolite will create will be accessible by users
   belonging to the `git` group.
-
 * Or, in `conf/gitolite.conf`, set the wiki repository to be accessible by the
   `git` group, as shown below. Make sure to set `$GIT_CONFIG_KEYS` in
-  `.gitolite.rc` to an appropriate value (e.g. `'.*'` to be really permissive),
-  so the `config` key gets properly evaluated.
+  `.gitolite.rc` to an appropriate value (e.g. `'.*'` which is the most
+  permissive), so the `config core.sharedRepository` key gets properly
+  evaluated.
+
 
     repo    wiki
         RW+ = ikiwiki
