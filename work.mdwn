@@ -5,10 +5,11 @@
 *   **2007 - 2010**: University of Pierre and Marie Curie
     ([UPMC](http://www.upmc.fr/en)), Paris, France
 
-    Ph.D in Computer Science, sponsored by STMicroelectronics
+    Ph.D. in Computer Science, sponsored by STMicroelectronics
 
     [Dynamic security architecture for multiprocessor
     systems-on-chip](work/phd)
+
 
 *   **2002 - 2005**: University of Pierre and Marie Curie
     ([UPMC](http://www.upmc.fr/en)), Paris, France
@@ -30,6 +31,7 @@
 
     Advised by Prof. Alain Greiner ([link](http://www-soc.lip6.fr/~alain/))
 
+
 *   **2011 - 2012**: Columbia University ([CU](http://www.columbia.edu/)), New
     York City, USA
 
@@ -40,3 +42,64 @@
 
     Advised by Prof. Simha Sethumadhavan
     ([link](http://www.cs.columbia.edu/~simha))
+
+
+*   **2010 - 2011**: University of Pierre and Marie Curie
+    ([UPMC](http://www.upmc.fr/en)), Paris, France
+
+    Research and teaching assistant
+
+    Finished writing my Ph.D. [thesis](work/phd) and did ~200 hours of
+    [[teaching]]
+
+
+*   **2007 - 2010**: STMicroelectronics, Rousset, France
+
+    Embedded systems R&D engineer and Ph.D. candidate
+
+    [Dynamic security architecture for multiprocessor
+    systems-on-chip](work/phd)
+
+
+*   **2006**: Thalès Communication, Colombes, France
+
+    Intern
+
+    Parallelization and deployment of a H.264 video decoder on a multiprocessor
+    virtual system-on-chip prototype using [SoCLib](http://www.soclib.fr)
+    SystemC simulation framework
+
+
+*   **2005 - 2006**: Indian Institute of Technology Delhi
+    ([IITD](http://www.iitd.ac.in/)), New Delhi, India
+
+    Research intern
+
+    Development of a bipartitioning tool for FPGA placed and routed modules, in
+    order to solve the fragmentation issue in the case of partial dynamic
+    reconfiguration
+
+    Advised by Prof. Kolin Paul ([link](http://www.cse.iitd.ac.in/kolin/))
+
+
+*   **2005**: University of Pierre and Marie Curie
+    ([UPMC](http://www.upmc.fr/en)), Paris, France
+
+    Research intern (master's thesis)
+
+    Development of a superscalar processor simulation model using
+    [SoCLib](http://www.soclib.fr) SystemC simulation framework
+
+# Publications
+
+[Dedicated page](work/publications)
+
+# Other
+
+French is my mother tongue and I'm fluent in English.
+
+Since a couple years, I really have got into
+[improv](http://en.wikipedia.org/wiki/Improvisational_theatre). I started in
+New York, following two classes at the People's Improv Theater
+([PIT](http://thepit-nyc.com/)). And I'm now a member of the Parisian
+Improvisation League ([LIP](http://www.improparis.com/)).
