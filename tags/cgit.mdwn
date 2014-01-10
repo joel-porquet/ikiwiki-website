@@ -1,0 +1,4 @@
+[[!meta title="pages tagged cgit"]]
+
+[[!inline pages="tagged(cgit)" actions="no" archive="yes"
+feedshow=10]]
