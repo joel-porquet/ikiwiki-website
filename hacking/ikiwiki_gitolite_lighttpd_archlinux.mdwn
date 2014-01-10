@@ -87,7 +87,8 @@ The command above will create two files, `/srv/ikiwiki/.ssh/id_dsa` and
 public key.
 
 Configure gitolite to create a new git repository and give access to this
-repository to the ikiwiki user. In `conf/gitolite.conf`:
+repository to the ikiwiki user. In the file `conf/gitolite.conf` of the
+gitolite admin repository, define the new repository for the wiki:
 
     repo    wiki
         RW+ = ikiwiki
