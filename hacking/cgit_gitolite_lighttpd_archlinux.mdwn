@@ -21,7 +21,7 @@ Create a configuration file containing (at least) the following options:
     scan-path=/srv/git/repositories
 
 A few more options can also be interesting, such as source code highlighting or
-`gitweb` options usage.
+gitweb options.
 
 **Be careful that additional options must be set before `scan-path` otherwise
 they will not have any effect!**
@@ -80,7 +80,7 @@ Define (at least) the following modules in the configuration of lighttpd:
 * `mod_alias`: to modify the document root in a clean manner
 * `mod_cgi`: to be able to execute `cgit.cgi`
 * `mod_rewrite`: to create nice permalinks, such as `cgit.cgi/wiki.git/tree/`
-  instead of `cgit.cgi?url=wiki.git/tree
+  instead of `cgit.cgi?url=wiki.git/tree`
 
 And add the following configuration to serve cgit:
 
