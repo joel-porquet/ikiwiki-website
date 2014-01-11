@@ -1,6 +1,6 @@
 [[!meta title="Publications"]]
 
-# International conferences with proceedings and reviewing committee:
+# International conferences with proceedings and reviewing committee
 
 *   Joël Porquet and Simha Sethumadhavan<br />
     **WHISK: An Uncore Architecture for Dynamic Information Flow Tracking in

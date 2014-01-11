@@ -1,4 +1,4 @@
-[[!meta title="Joël Porquet's resume"]]
+[[!meta title="Resume"]]
 
 # Education
 
@@ -74,7 +74,7 @@
 
 # Other
 
-French is my mother tongue and I'm fluent in English.
+French is my native language and I'm fluent in English.
 
 Since a couple years, I really have got into
 [improv](http://en.wikipedia.org/wiki/Improvisational_theatre). I started in
