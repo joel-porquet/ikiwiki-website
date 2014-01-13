@@ -10,6 +10,6 @@ If you really want to, you can contact me at `joel.porquet@gmail.com` or
 `joel.porquet@lip6.fr`.
 
 Otherwise, you can just enjoy browsing this website using the navigation bar
-above. Additionally to being classified into primary categories, most of the
+above. In addition to being classified into primary categories, most of the
 pages are also accessible through [[tags]] and there is a [[timeline]] that
 shows the most recently created/modified pages.
