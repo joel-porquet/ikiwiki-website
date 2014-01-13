@@ -2,11 +2,12 @@
 
 # Education
 
-*   **2007 - 2010**: University of Pierre and Marie Curie
+*   ###2007 - 2010: University of Pierre and Marie Curie###
     ([UPMC](http://www.upmc.fr/en)), Paris, France<br />
-    Ph.D. in Computer Science, sponsored by STMicroelectronics<br />
-    [[Dynamic security architecture for multiprocessor
-    systems-on-chip|phd]]
+    **Ph.D.** in Computer Science, sponsored by
+    [STMicroelectronics](http://www.st.com)<br />
+    *[[Dynamic security architecture for multiprocessor
+    systems-on-chip|phd]]*
 
 
 *   **2002 - 2005**: University of Pierre and Marie Curie
