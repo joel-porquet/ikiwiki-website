@@ -1,1 +1,46 @@
-[[!meta title="Everything related to academic teaching"]]
+[[!meta title="Teaching activities"]]
+
+A chronologically ordered list of my teachings, at University of Pierre and
+Marie Curie ([UPMC](http://www.upmc.fr/en)).
+
+* **L2/L3** means second/third year of *Licence*. *Licence* is the French
+  version of the Bachelor's degree, although *Licence* lasts only 3 years.
+* **M1/M2** means first/second year of a French *Master's program*.
+
+# Fall 2013
+
+*   #### L3: Software and hardware architecture of computers
+    Tutorial and lab sessions, 44h
+
+*   #### M1: SystemC
+    Lecture and lab sessions, 20h<br />
+    *Re-wrote most of the lecture material*<br />
+    *Re-coded most of the lab assignements*<br />
+    (link to the resources soon)
+
+# Spring 2010
+
+*   #### L2: Data types and structures
+    Tutorial and lab sessions, 43h
+
+*   #### L2: Computer and representation
+    Tutorial and lab sessions, 42h
+
+# Fall 2010
+
+*   #### L3: Software and hardware architecture of computers
+    Tutorial and lab sessions, 48h<br />
+    *Re-coded from scratch the small Operating System that is studied and used
+    by the students*<br />
+    *Re-formatted all the tutorial and lab assignements, and put them in a Trac
+    instance*<br />
+    (fr) [link](https://www-soc.lip6.fr/trac/sesi-almo/)
+
+*   #### M1: Processors architecture and code optimization
+    Tutorial sessions, 40h
+
+*   #### M2: Software application mapping on MPSoC
+    Lecture and lab sessions, 27h<br />
+    *Re-formatted all the lecture material and lab assignements, and put them
+    in a Trac instance*<br />
+    (fr) [link](https://www-soc.lip6.fr/trac/sesi-mjpeg)
