@@ -1,0 +1,67 @@
+[[!meta title="Ph.D. thesis"]]
+
+# Information
+
+* Title: **Dynamic security architecture for multiprocessor systems-on-chip**
+* (Original title: **Architecture de sécurité dynamique pour systèmes
+  multiprocesseurs intégrés sur puce**)
+
+* Defended on December 13th, 2010 at University of Pierre and Marie Curie
+  ([UPMC](http://www.upmc.fr/en)), Paris
+
+* Thesis committee:
+ * [Albert Cohen](https://www-roc.inria.fr/~acohen/index.html.en)
+   ([INRIA](http://www.inria.fr/en/), *dissertation reviewer*)
+ * [Tanguy Risset](http://perso.citi.insa-lyon.fr/trisset/)
+   ([INSA-Lyon](http://www.insa-lyon.fr/en), *dissertation reviewer*)
+ * [Jean-Claude Bajard](http://www-pequan.lip6.fr/~bajard/)
+   ([UPMC](http://www.upmc.fr/en))
+ * [Renaud Pacalet](http://perso.telecom-paristech.fr/~pacalet/) ([Telecom
+   ParisTech](http://www.telecom-paristech.fr/eng/))
+ * [Bernard Kasser](http://fr.linkedin.com/pub/bernard-kasser/0/103/960)
+   ([STMicroelectronics](http://www.st.com))
+ * [Christian Schwarz](http://ch.linkedin.com/in/chschwarz)
+   ([Nagravision](http://www.nagra.com),
+   ex-[STMicroelectronics](http://www.st.com), *industrial co-advisor*)
+ * [Alain Greiner](http://www-soc.lip6.fr/~alain/)
+   ([UPMC](http://www.upmc.fr/en), *academical advisor*)
+
+# Resources
+
+* (fr) [Dissertation](http://tel.archives-ouvertes.fr/docs/00/57/40/88/PDF/porquet.pdf)
+* (fr) [Slides](http://tel.archives-ouvertes.fr/docs/00/57/40/88/ANNEX/porquet.pdf)
+
+# Abstract
+
+This thesis presents the multi-compartment approach. This approach enables a
+secure and flexible co-hosting of multiple autonomous software stacks within a
+same multiprocessor system-on-a-chip. In the field of multimedia oriented
+consumer devices, such autonomous software stacks generally represent the
+assets of the different stakeholders. These stakeholders, chips and set-top
+boxes manufacturers, network operators, content providers and customers, do not
+necessarily trust each other. Hence, the requirement to find a means to execute
+those software stacks together, while enforcing a certain degree of isolation.
+Multimedia chips are heavily heterogeneous -- a few general purpose processors
+are assisted by numerous specialized processors or coprocessors -- and follow a
+shared memory policy. These hardware specificities make it difficult, and even
+impossible, to solve this problematic with recent co-hosting techniques only
+(e.g. virtualization). The multi-compartment approach consists in a new trust
+model, more flexible and generic than the current ones. It allows various
+software stacks to run securely and simultaneously on heterogeneous hardware
+platforms. In particular, the core of the proposed approach is composed of a
+global mechanism for protection. Such a mechanism is responsible for the secure
+sharing of the single address space and is placed within the interconnect to
+ensure the best control. The multi-compartment approach also presents solutions
+for sharing peripheral devices, and more precisely DMA capable devices, among
+software stacks. Finally, the approach introduces solutions for the hardware
+interrupts redirection problem, a collateral aspect to the peripheral devices
+sharing. The main building blocks of the proposed hardware and software
+solutions are implemented along with the conception of an experimental
+platform, under the form of a virtual prototype. In addition to validating the
+approach, the platform is measured in terms of cost, performance and hardware
+surface. Considering both aspects, the obtained results show the cost is
+negligible.
+
+*keyword(s)*: security - multiprocessor system-on-a-chip - network-on-chip -
+software co-hosting - virtualization - hardware-software co-design - virtual
+prototyping
