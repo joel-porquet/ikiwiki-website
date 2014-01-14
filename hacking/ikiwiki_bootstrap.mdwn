@@ -13,16 +13,17 @@ is too small (e.g. on a smartphone).
 The bootmenu plugin, developed by [Julian Andres Klode](http://jak-linux.org/),
 helps populating the navigation bar.
 
-Start by downloading the plugin, by going to the
+Start by downloading the plugin: go to the
 [gitweb](http://anonscm.debian.org/gitweb/?p=users/jak/website.git;a=tree;hb=refs/heads/plugin)
-associated to it and finding the file `IkiWiki/Plugin/bootmenu.pm`.
+associated to it and find the file `IkiWiki/Plugin/bootmenu.pm`.
 
-Follow this [ikiwiki page](http://ikiwiki.info/plugins/install/) to learn about
-installing third party plugins.
+It might be interesting to read this [ikiwiki manual
+page](http://ikiwiki.info/plugins/install/) to learn about installing third
+party plugins.
 
-Here, assuming the same setup as in this
+Here, assuming the same setup as in my previous
 [[article|ikiwiki_gitolite_lighttpd_archlinux]], the plugin file could be
-stored there:
+locally stored in the following path:
 
     /srv/ikiwiki/IkiWiki/Plugin/bootmenu.pm
 
@@ -225,7 +226,8 @@ adaptation. Edit your `local.css` file and add the following rule:
 
 # Enjoy
 
-Commit and push the templates and enjoy your new design!
+Commit and push the templates (and the css and javascript files) and enjoy your
+new design!
 
 Try to enable `html5` generation in your wiki setup file, which should even
 better enhance bootstrap support (e.g. displaying "Search" in the search form).
