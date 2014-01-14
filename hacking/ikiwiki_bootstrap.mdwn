@@ -1,0 +1,234 @@
+[[!meta title="Bootstrap design for ikiwiki"]]
+
+Although ikiwiki does a hell of a good job as wiki compiler, its default design
+is fairly ugly. Fortunately, it is possible to make things better and quite
+easily thanks to [bootstrap](http://getbootstrap.com/) (here in version 3.0.3).
+
+For instance, bootstrap makes possible to have a fixed navigation bar at the
+top of the screen, which automatically collapses when the width of the display
+is too small (e.g. on a smartphone).
+
+# Bootmenu plugin
+
+The bootmenu plugin, developed by [Julian Andres Klode](http://jak-linux.org/),
+helps populating the navigation bar.
+
+Start by downloading the plugin, by going to the
+[gitweb](http://anonscm.debian.org/gitweb/?p=users/jak/website.git;a=tree;hb=refs/heads/plugin)
+associated to it and finding the file `IkiWiki/Plugin/bootmenu.pm`.
+
+Follow this [ikiwiki page](http://ikiwiki.info/plugins/install/) to learn about
+installing third party plugins.
+
+Here, assuming the same setup as in this
+[[article|ikiwiki_gitolite_lighttpd_archlinux]], the plugin file could be
+stored there:
+
+    /srv/ikiwiki/IkiWiki/Plugin/bootmenu.pm
+
+Edit the setup file of the wiki instance that should be adapted to bootstrap
+and declare this new directory as `libdir`. Also active the bootmenu plugin.
+
+    add_plugins:
+    - bootmenu
+
+    libdir: /srv/ikiwiki
+
+Inform ikiwiki about the changes so it can regenerate the setup file:
+
+    $ sudo -u ikiwiki ikiwiki --changesetup /srv/ikiwiki/wiki.setup
+
+New fields should have appeared in the setup file, for populating the
+navigation bar. Add links to existing pages, i.e. existing mdwn pages. The
+`bootmenu` list contains links that will ordered on the left of the bar, while
+the `bootmenu2` list will be ordered on the right. A possible example could be:
+
+    bootmenu:
+    - hacking
+    - work
+    - personal
+    bootmenu2:
+    - tags
+    - timeline
+    - about
+
+Even if it will not change anything yet, because nothing in the templates uses
+these new information, rebuild the website:
+
+    $ sudo  -u ikiwiki ikiwiki --setup /srv/ikiwiki/wiki.setup
+
+*Note to self: ideally, it would best to be able to declare the content of the
+navigation bar inside a mdwn file, as for the sidebar plugin. In addition to
+being cleaner, and has better maintainability, it would for example enable
+using drop-down menus if there is more than one layer of links.*
+
+# Get bootstrap
+
+Download [bootstrap](http://getbootstrap.com/), and
+[jquery](http://jquery.com/). Put the required files in your local wiki
+repository. Here is the folder hierarchy I adopted, and I assume in the rest of
+this article:
+
+    $ cd mywikirepo
+    $ find ext
+    ext
+    ext/css
+    ext/css/bootstrap-theme.min.css
+    ext/css/bootstrap.min.css
+    ext/js
+    ext/js/jquery.min.js
+    ext/js/bootstrap.min.js
+
+# Page template
+
+It is now time to create a new page template, in your local wiki repository.
+Start by copying the original template:
+
+    $ cp /usr/share/ikiwiki/templates/page.tmpl mywikirepo/templates
+
+Then, here are the different locations you must modify the file to include
+bootstrap support.
+
+First in the `head` section, we declare a responsive interface and include the
+css style sheets we need:
+
+     <TMPL_IF HTML5><meta charset="utf-8" /><TMPL_ELSE><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></TMPL_IF>
+    +<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title><TMPL_VAR TITLE></title>
+
+    ...
+
+     <link rel="stylesheet" href="<TMPL_VAR BASEURL>style.css" type="text/css" />
+    +
+    +<!-- bootstrap -->
+    +<link rel="stylesheet" href="<TMPL_VAR BASEURL>ext/css/bootstrap.min.css" />
+    +<link rel="stylesheet" href="<TMPL_VAR BASEURL>ext/css/bootstrap-theme.min.css" />
+    +
+     <TMPL_IF LOCAL_CSS>
+
+Then, in the `body` section, we declare the navigation bar and rework the
+header part a bit (I removed the parent links hierarchy and only kept the page
+title):
+
+     <body>
+
+    -<TMPL_IF HTML5><article class="page"><TMPL_ELSE><div class="page"></TMPL_IF>
+    +<TMPL_IF HTML5><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><TMPL_ELSE><div class="navbar navbar-default navbar-fixed-top" role="navigation"></TMPL_IF>
+    +  <!-- Brand and toggle get grouped for better mobile display -->
+    +  <div class="container">
+    +  <div class="navbar-header">
+    +    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    +      <span class="sr-only">Toggle navigation</span>
+    +      <span class="icon-bar"></span>
+    +      <span class="icon-bar"></span>
+    +      <span class="icon-bar"></span>
+    +      <span class="icon-bar"></span>
+    +    </button>
+    +    <a class="navbar-brand" href="<TMPL_VAR BASEURL>"><TMPL_VAR WIKINAME></a>
+    +  </div>
+    +
+    +  <!-- Collect the nav links, forms, and other content for toggling -->
+    +  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    +    <ul class="nav navbar-nav">
+    +      <TMPL_LOOP BOOTMENU>
+    +        <TMPL_IF FIRSTNAV>
+    +          <TMPL_IF ACTIVE><li class="active"><TMPL_ELSE><li></TMPL_IF>
+    +            <a href="<TMPL_VAR URL>"><TMPL_VAR PAGE></a>
+    +          </li>
+    +        </TMPL_IF>
+    +      </TMPL_LOOP>
+    +    </ul>
+    +    <TMPL_IF SEARCHFORM>
+    +    <TMPL_VAR SEARCHFORM>
+    +    </TMPL_IF>
+    +    <ul class="nav navbar-nav navbar-right">
+    +      <TMPL_LOOP BOOTMENU>
+    +        <TMPL_IF FIRSTNAV>
+    +        <TMPL_ELSE>
+    +          <TMPL_IF ACTIVE><li class="active"><TMPL_ELSE><li></TMPL_IF>
+    +            <a href="<TMPL_VAR URL>"><TMPL_VAR PAGE></a>
+    +          </li>
+    +        </TMPL_IF>
+    +      </TMPL_LOOP>
+    +    </ul>
+    +  </div><!-- /.navbar-collapse -->
+    +  </div>
+    +<TMPL_IF HTML5></nav><TMPL_ELSE></div></TMPL_IF>
+    +
+    +<TMPL_IF HTML5><article class="container"><TMPL_ELSE><div class="container"></TMPL_IF>
+     
+    -<TMPL_IF HTML5><section class="pageheader"><TMPL_ELSE><div class="pageheader"></TMPL_IF>
+    +<TMPL_IF HTML5><section class="page-header"><TMPL_ELSE><div class="page-header"></TMPL_IF>
+     <TMPL_IF HTML5><header class="header"><TMPL_ELSE><div class="header"></TMPL_IF>
+    -<span>
+    -<span class="parentlinks">
+    -<TMPL_LOOP PARENTLINKS>
+    -<a href="<TMPL_VAR URL>"><TMPL_VAR PAGE></a>/ 
+    -</TMPL_LOOP>
+    -</span>
+    -<span class="title">
+    -<TMPL_VAR TITLE>
+    +<h1><TMPL_VAR TITLE>
+     <TMPL_IF ISTRANSLATION>
+     &nbsp;(<TMPL_VAR PERCENTTRANSLATED>%)
+     </TMPL_IF>
+    -</span>
+    -</span>
+    -<TMPL_UNLESS DYNAMIC>
+    -<TMPL_IF SEARCHFORM>
+    -<TMPL_VAR SEARCHFORM>
+    -</TMPL_IF>
+    -</TMPL_UNLESS>
+    +</h1>
+     <TMPL_IF HTML5></header><TMPL_ELSE></div></TMPL_IF>
+
+Still in the `body` section, we use bootstrap's footer class:
+
+    -<TMPL_IF HTML5><footer id="footer" class="pagefooter"><TMPL_ELSE><div id="footer" class="pagefooter"></TMPL_IF>
+    +<TMPL_IF HTML5><footer class="footer"><TMPL_ELSE><div class="footer"></TMPL_IF>
+
+And finally, before closing the `body` section, we include the javascript files bootstrap needs:
+
+     <TMPL_IF HTML5></article><TMPL_ELSE></div></TMPL_IF>
+
+    +<script type="text/javascript" src="<TMPL_VAR BASEURL>ext/js/jquery.min.js"></script>
+    +<script type="text/javascript" src="<TMPL_VAR BASEURL>ext/js/bootstrap.min.js"></script>
+    +
+     </body>
+
+# Searchform template
+
+To get a better integration with bootstrap, we also have to modify the
+searchform template. Here I modified `googleform.tmpl` as follows:
+
+    -<form method="get" action="http://www.google.com/search" id="searchform">
+    - <div>
+    +<form class="navbar-form navbar-right" role="search" method="get" action="https://www.google.com/search">
+    + <div class="form-group">
+       <input name="sitesearch" value="<TMPL_VAR URL>" type="hidden" />
+    -  <input name="q" value="" id="searchbox" size="16" maxlength="255" type="text"
+    -  <TMPL_IF HTML5>placeholder="search"</TMPL_IF> />
+    +  <input class="form-control" id="searchbox" name="q" value="" maxlength="255" type="text"
+    +  <TMPL_IF HTML5>placeholder="Search"</TMPL_IF> />
+      </div>
+     </form>
+
+# CSS improvements
+
+Using bootstrap with a fixed navigation bar requires at least one css
+adaptation. Edit your `local.css` file and add the following rule:
+
+    /* add padding to body because of navbar */
+    body {
+        padding-top: 50px;
+    }
+
+# Enjoy
+
+Commit and push the templates and enjoy your new design!
+
+Try to enable `html5` generation in your wiki setup file, which should even
+better enhance bootstrap support (e.g. displaying "Search" in the search form).
+
+You can check my [cgit](https://joel.porquet.org/cgit/cgit.cgi/wiki.git/) and
+have a look at my templates, css files, etc.
