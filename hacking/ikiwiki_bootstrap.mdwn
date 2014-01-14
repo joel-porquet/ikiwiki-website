@@ -1,4 +1,5 @@
 [[!meta title="Bootstrap design for ikiwiki"]]
+[[!tag ikiwiki bootstrap]]
 
 Although ikiwiki does a hell of a good job as wiki compiler, its default design
 is fairly ugly. Fortunately, it is possible to make things better and quite
@@ -7,6 +8,11 @@ easily thanks to [bootstrap](http://getbootstrap.com/) (here in version 3.0.3).
 For instance, bootstrap makes possible to have a fixed navigation bar at the
 top of the screen, which automatically collapses when the width of the display
 is too small (e.g. on a smartphone).
+
+# Sources
+
+* <http://jak-linux.org/about/>
+* <https://w.ceops.eu/words/posts/Improving%20Ikiwiki%20style%20with%20Bootstrap/>
 
 # Bootmenu plugin
 
