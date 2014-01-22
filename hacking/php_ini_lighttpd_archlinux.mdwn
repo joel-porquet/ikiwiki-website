@@ -38,7 +38,7 @@ service. To avoid doing everything from scratch, we start by copying the global
 
 Then, we are able to customize it, especially the `open_basedir` option:
 
-    open_basedir = /tmp/:/usr/share/webapps/tt-rss/:/etc/webapps/tt-rss/:/var/lib/tt-rss/
+    open_basedir = /tmp/:/usr/share/webapps/webservice/:/etc/webapps/webservice/:/var/lib/webservice/
 
 It is also possible to enable the different plugins for that particular web
 service, e.g.:
@@ -80,7 +80,7 @@ to `php-cgi` which makes it possible to specify a custom `php.ini` file.
 # Use-case: Tiny Tiny RSS
 
 Tiny Tiny RSS (or tt-rss) is a bit of pain to configure because it has a PHP
-daemon that refreshes feeds, and we want this daemon to also run with the
+daemon that refreshes feeds, and we want this daemon to also run using the
 custom `php.ini`.
 
 Start by creating a custom `php.ini` and put it in `/etc/webapps/tt-rss`. Mine
@@ -116,7 +116,8 @@ The configuration for lighttpd looks like:
     }
 
 And now, for the PHP daemon, we have to change two things. First we have to
-modify the systemd service associated to it:
+modify the systemd service associated to it (on archlinux, this file is located
+at `/usr/lib/systemd/system/tt-rss.service`):
 
     -ExecStart=/usr/bin/php /usr/share/webapps/tt-rss/update.php --daemon
     +ExecStart=/usr/bin/php -c /etc/webapps/tt-rss/php.ini /usr/share/webapps/tt-rss/update.php --daemon
