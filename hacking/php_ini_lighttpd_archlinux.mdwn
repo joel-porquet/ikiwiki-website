@@ -1,0 +1,130 @@
+[[!meta title="Custom 'php.ini' for web services with lighttpd"]]
+[[!tag lighttpd archlinux]]
+
+# Lighttpd and Archlinux
+
+## The problem
+
+Often, in Archlinux's wiki, it is advised to modify the global
+`/etc/php/php.ini` file to allow PHP web services access to different location.
+We can thus read awful instructions such as
+([source](https://wiki.archlinux.org/index.php/Dokuwiki#lighttpd_Specific_Configuration)):
+
+*Then, adjust the open_basedir in /etc/php/php.ini to include the dokuwiki
+directories (php forbids following symbolic links outside of the allowed
+scope):*
+
+    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps/dokuwiki/:/var/lib/dokuwiki/
+
+And basically, the more we add PHP web services, the more any PHP applications
+get access to any location in the filesystem.
+
+## The solution
+
+The solution, to keep each web services "chrooted" in a certain set of
+locations, is to define a `php.ini` file per web service.
+
+Let us consider a web service named `webservice`. Its PHP files are put under
+`/usr/share/webapps/webservice` and its configuration is located under
+`/etc/webapps/webservice`.
+
+### php.ini
+
+The first thing to do is to create a new `php.ini` for that particular web
+service. To avoid doing everything from scratch, we start by copying the global
+`php.ini` of the system:
+
+    # cp /etc/php/php.ini /etc/webapps/webservice/php.ini
+
+Then, we are able to customize it, especially the `open_basedir` option:
+
+    open_basedir = /tmp/:/usr/share/webapps/tt-rss/:/etc/webapps/tt-rss/:/var/lib/tt-rss/
+
+It is also possible to enable the different plugins for that particular web
+service, e.g.:
+
+    ...
+    extension=iconv.so
+    extension=mysql.so
+    ...
+
+### lighttpd.conf
+
+Now it is possible to use this special `php.ini` file in lighttpd
+configuration. Here is what it could look like:
+
+    var.webservice_url = "/rss"
+    var.webservice_path = "/usr/share/webapps/webservice"
+    var.webservice_etc = "/etc/webapps/webservice"
+
+    $HTTP["url"] =~ "^" + webservice_url + "(|/.*)" {
+        # use this path instead of the normal document-root
+        alias.url += ( webservice_url => webservice_path )
+        index-file.names += ( "index.php" )
+        # special configuration for php
+        fastcgi.server = (
+            ".php" => (
+                "localhost" => (
+                    "bin-path" => "/usr/bin/php-cgi -c " + webservice_etc + "/php.ini",
+                    "socket" => state_dir + "/php-fastcgi-webservice.socket",
+                    "max-procs" => 1,
+                    "broken-scriptfilename" => "enable"
+                )
+            )
+        )
+    }
+
+The important part of this configuration snippet is the use of the `-c` option
+to `php-cgi` which makes it possible to specify a custom `php.ini` file.
+
+# Use-case: Tiny Tiny RSS
+
+Tiny Tiny RSS (or tt-rss) is a bit of pain to configure because it has a PHP
+daemon that refreshes feeds, and we want this daemon to also run with the
+custom `php.ini`.
+
+Start by creating a custom `php.ini` and put it in `/etc/webapps/tt-rss`. Mine
+looks like:
+
+    open_basedir = /tmp/:/usr/share/webapps/tt-rss/:/etc/webapps/tt-rss/:/var/lib/tt-rss/
+
+The configuration for lighttpd looks like:
+
+    var.ttrss_url = "/rss"
+    var.ttrss_path = "/usr/share/webapps/tt-rss"
+    var.ttrss_etc = "/etc/webapps/tt-rss"
+
+    $HTTP["url"] =~ "^" + ttrss_url + "(|/.*)" {
+        # disallow access to apache htaccess files
+        $HTTP["url"] =~ "/(\.|_)ht" {
+            url.access-deny = ( "" )
+            }
+        # use this path instead of the normal document-root
+        alias.url += ( ttrss_url => ttrss_path )
+        index-file.names += ( "index.php" )
+        # special configuration for php
+        fastcgi.server = (
+            ".php" => (
+                "localhost" => (
+                    "bin-path" => "/usr/bin/php-cgi -c " + ttrss_etc + "/php.ini",
+                    "socket" => state_dir + "/php-fastcgi-ttrss.socket",
+                    "max-procs" => 1,
+                    "broken-scriptfilename" => "enable"
+                )
+            )
+        )
+    }
+
+And now, for the PHP daemon, we have to change two things. First we have to
+modify the systemd service associated to it:
+
+    -ExecStart=/usr/bin/php /usr/share/webapps/tt-rss/update.php --daemon
+    +ExecStart=/usr/bin/php -c /etc/webapps/tt-rss/php.ini /usr/share/webapps/tt-rss/update.php --daemon
+
+And second, we have to modify the updating daemon located at
+`/usr/share/webapps/tt-rss/update.php`:
+
+    -passthru(PHP_EXECUTABLE . " " . $argv[0] ." --daemon-loop $quiet $log");
+    +passthru(PHP_EXECUTABLE . " -c /etc/webapps/tt-rss/php.ini " . $argv[0] ." --daemon-loop $quiet");
+
+Enjoy! You now have a more secure and rather clean PHP configuration!
