@@ -3,7 +3,7 @@
 Since May 2013, I've been working as a **Postdoctoral research assistant** at
 [UPMC](http://www.upmc.fr/en) (Université Pierre et Marie Curie - Paris 6)
 within the [LIP6](http://www.lip6.fr/?LANG=en) (Laboratoire d'Informatique de
-Paris 6). More about my [current work](work/portage_linux_tsar) and my [full
+Paris 6). More about my [current work](work/linux_tsar_porting) and my [full
 resume](work).
 
 If you really want to, you can contact me at `joel.porquet@gmail.com` or
