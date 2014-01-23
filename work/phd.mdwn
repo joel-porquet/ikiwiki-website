@@ -62,6 +62,38 @@ approach, the platform is measured in terms of cost, performance and hardware
 surface. Considering both aspects, the obtained results show the cost is
 negligible.
 
-*keyword(s)*: security - multiprocessor system-on-a-chip - network-on-chip -
+*keyword(s): security - multiprocessor system-on-a-chip - network-on-chip -
 software co-hosting - virtualization - hardware-software co-design - virtual
-prototyping
+prototyping*
+
+# Technical
+
+Even if most of my Ph.D. practical work is unfortunately protected by a NDA
+with STMicroelectronics, I can still mention that I made great use of two
+awesome academic projects, namely [SoCLib](http://www.soclib.fr/) and
+[MutekH](http://www.mutekh.org/).
+
+SoCLib is an open platform for virtual prototyping of multiprocessor
+systems-on-chip. Basically, it is a set of SystemC models along with a smart
+build system, for building simple and complex simulation systems. Using SoCLib,
+I developed a MIPS-based multiprocessor and multicluster system-on-chip model,
+including the security module I proposed in my Ph.D. You can find my
+contributions to SoCLib
+[here](http://www.soclib.fr/trac/dev/search?q=joel&noquickjump=1&changeset=on&ticket=on&wiki=on)
+and
+[there](http://www.soclib.fr/trac/dev/search?q=porquet&noquickjump=1&changeset=on&ticket=on&wiki=on)
+(I committed changes under several names and Trac doesn't support OR in
+searches).
+
+MutekH is free exokernel-based operating system for embedded systems. I
+developed a few modules for MutekH, especially a dynamic ELF loader. It allowed
+me to to dynamically load user applications, which was needed for my Ph.D.
+work, instead of compiling applications in-kernel as MutekH usually operates.
+In addition to this
+[libelf](http://www.mutekh.org/trac/mutekh/browser/hg/libelf), I also developed
+a module, named
+[libdsrl](http://www.mutekh.org/trac/mutekh/browser/hg/libdsrl), that offered a
+LUA interface for scripting applications lauching. It was very useful for
+describing and launching complex dataflow applications, composed of several
+threads communicating via software channels. Find the list of my contributions
+to MutekH [here](http://www.mutekh.org/trac/mutekh/wiki/Contributors).
