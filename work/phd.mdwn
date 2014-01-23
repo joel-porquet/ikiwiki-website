@@ -82,18 +82,19 @@ contributions to SoCLib
 [here](http://www.soclib.fr/trac/dev/search?q=joel&noquickjump=1&changeset=on&ticket=on&wiki=on)
 and
 [there](http://www.soclib.fr/trac/dev/search?q=porquet&noquickjump=1&changeset=on&ticket=on&wiki=on)
-(I committed changes under several names and Trac doesn't support OR in
-searches).
+(I committed changes under several different names and Trac does not seem to
+support OR in searches).
 
-MutekH is free exokernel-based operating system for embedded systems. I
-developed a few modules for MutekH, especially a dynamic ELF loader. It allowed
-me to to dynamically load user applications, which was needed for my Ph.D.
-work, instead of compiling applications in-kernel as MutekH usually operates.
-In addition to this
+MutekH is a free exokernel-based operating system for embedded systems. I
+developed a few modules for MutekH over the course of my Ph.D. and after. The
+biggest module I added was a dynamic ELF loader (for MIPS). It allowed me to
+dynamically load user applications, which was needed for my Ph.D. work (or
+maybe not... but it was fun to do it anyway!), instead of having in-kernel
+applications only as MutekH usually operates. In addition to this
 [libelf](http://www.mutekh.org/trac/mutekh/browser/hg/libelf), I also developed
 a module, named
 [libdsrl](http://www.mutekh.org/trac/mutekh/browser/hg/libdsrl), that offered a
-LUA interface for scripting applications lauching. It was very useful for
-describing and launching complex dataflow applications, composed of several
+LUA interface for scripting applications launching. It was very useful for
+describing and launching complex data-flow applications, composed of several
 threads communicating via software channels. Find the list of my contributions
 to MutekH [here](http://www.mutekh.org/trac/mutekh/wiki/Contributors).
