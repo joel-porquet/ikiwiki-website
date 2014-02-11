@@ -1,1 +1,15 @@
 [[!meta title="What doesn't fit into the other categories"]]
+
+# Things to do around the world
+
+Knowing a city (e.g. its best restaurants, its cheapest bars, the underground
+activities it offers, etc.) takes time. It also often requires meeting the
+right people who will tell you where to go and what to do, which you won't find
+on tripadvisor or in a guidebook. Here are my compilations of things to do in
+different cities around the world that I was lucky enough to discover:
+
+* [[Paris, France|todo_paris]]
+* [[New York, USA|todo_nyc]]
+* [[Istanbul, Turkey|todo_istanbul]]
+* [[Libreville, Gabon|todo_libreville]]
+* [[Florence, Italy|todo_florence]]
