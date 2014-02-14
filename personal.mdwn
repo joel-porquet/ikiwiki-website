@@ -11,5 +11,7 @@ different cities around the world that I was lucky enough to discover:
 * [[Paris, France|todo_paris]]
 * [[New York, USA|todo_nyc]]
 * [[Istanbul, Turkey|todo_istanbul]]
+<!---
 * [[Libreville, Gabon|todo_libreville]]
 * [[Florence, Italy|todo_florence]]
+-->
