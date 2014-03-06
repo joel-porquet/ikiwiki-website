@@ -11,7 +11,8 @@ there end up doing).
 Start by installing cgit. On archlinux, the web part of it gets installed in
 `/usr/share/webapps/cgit`.
 
-Create a configuration file containing (at least) the following options:
+Create a configuration file (in `/etc/cgitrc`) containing (at least) the
+following options:
 
     # set correct urls for resources
     css=/cgit/cgit.css
@@ -22,7 +23,7 @@ Create a configuration file containing (at least) the following options:
     scan-path=/srv/git/repositories
 
 A few more options can also be interesting, such as source code highlighting or
-gitweb options.
+gitweb options (see below).
 
 **Be careful that additional options must be set before `scan-path` otherwise
 they will not have any effect!**
