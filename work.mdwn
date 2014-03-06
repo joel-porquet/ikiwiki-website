@@ -1,18 +1,5 @@
 [[!meta title="Resume"]]
 
-# Education
-
-*   #### 2007 - 2010: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
-    **Ph.D.** in Computer Science, sponsored by
-    [STMicroelectronics](http://www.st.com)<br />
-    *[[Dynamic security architecture for multiprocessor
-    systems-on-chip|phd]]*
-
-
-*   #### 2002 - 2005: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
-    **Master and Bachelor degrees** in Computer Science<br />
-    Specialization in *Architecture and Design of Integrated Systems*<br />
-    *First class honours ("mention très bien")*
 
 # Professional/research experiences
 
@@ -59,6 +46,20 @@
     **Research intern** (Master's thesis)<br />
     *Development of a superscalar processor simulation model using
     [SoCLib](http://www.soclib.fr) SystemC simulation framework*<br />
+
+# Education
+
+*   #### 2007 - 2010: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
+    **Ph.D.** in Computer Science, sponsored by
+    [STMicroelectronics](http://www.st.com)<br />
+    *[[Dynamic security architecture for multiprocessor
+    systems-on-chip|phd]]*
+
+
+*   #### 2002 - 2005: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
+    **Master and Bachelor degrees** in Computer Science<br />
+    Specialization in *Architecture and Design of Integrated Systems*<br />
+    *First class honours ("mention très bien")*
 
 # Publications
 
