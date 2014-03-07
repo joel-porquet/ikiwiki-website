@@ -1,0 +1,315 @@
+[[!meta title="IMAPS gateway with getmail and dovecot"]]
+[[!tag getmail dovecot archlinux]]
+
+It had been a while I wanted to have another solution for emails than Gmail.
+Especially because I am currently working on the Linux Kernel and at some point
+I would like to submit a few patches eventually. Unfortunately, it is
+impossible to use Gmail for sending them or even, to a greater extend, to be
+involved in the LKML.
+
+Also I think it is pretty fancy (nerdy?) to have my own email address, i.e.
+`joel@porquet.org`.
+
+At the same time, I have always heard that managing a full email stack (from
+the *mx* DNS records up to the IMAP and SMTP servers) is a pain. It can
+definitely happen that my server is down for a few days which would mean that
+my emails would be inaccessible in the meantime.
+
+That is why I had this idea of using a stable frontend (i.e. OVH, my hosting
+service company) before my email server, so that whenever my server is down, I
+can still access my emails through this frontend. One could argue that I could
+just use the email server that OVH provides but there are (at least) two
+reasons I do not want to:
+
+* The mailbox OVH offers me is only 2G in size, which is fairly small nowadays.
+* I would like to manage my own data (I like the cloud, but only if it is
+  mine!)
+
+Here is a picture of what I wanted to achieve (thanks to
+[Asciiflow](http://www.asciiflow.com/#Draw) for the following ASCII Flow
+Diagram!):
+
+    +-----------+              +-----------+               +--------------+
+    | OVH       |              | MYSERVER  |               | LAPTOP       |
+    |           |              |           |           +-->|--------------|
+    | +-------+ | push/delete  | +-------+ | push/sync |   |  MAIL CLIENT +---+
+    | | IMAPS +----------------->| IMAPS +<------------+   +--------------+   |
+    | +-------+ |              | +-------+ |           |   +--------------+   |
+    | +-------+ |              |           |           |   | ANDROID      |   |
+    | | SMTP  |<-------+       |           |           +-->|--------------|   |
+    | +-------+ |      |       |           |               |  MAIL CLIENT +---+
+    +-----------+      |       +-----------+               +--------------+   |
+                       +------------------------------------------------------+
+
+In a few words:
+
+* OVH gives me the stable frontend. Whenever my server is down, I can still
+  send emails through their STMP server, and I can still receive emails (they
+  provide IMAP access as well as a RoundCube webmail).
+* If everything goes fine, then the emails are retrieved on my server (ideally
+  using IMAP IDLE to minimize the communications) and deleted on OVH mailbox
+  (we will see later how we can actually have a backup of X days on OVH, so
+  that if my server is down, I still have access to the most recent received
+  emails on OVH).
+* My server offers a IMAPS access to my clients (laptop, android, etc.), also
+  supporting IMAP IDLE.
+* The clients are synchronized with the server so all my emails are accessible
+  offline (at least on my laptop; for android, I would limit the
+  synchronization to a certain number of days)
+* The clients use the STMP server provided by OVH directly.
+
+Everything pretty much relies on two (great) pieces of software:
+[getmail](http://pyropus.ca/software/getmail/) and
+[dovecot](http://www.dovecot.org/). Getmail will be in charge of fetching the
+emails from the OVH mailbox (using IMAP IDLE), and delivering them to dovecot.
+Dovecot will service the IMAPS access to the clients, as well as managing the
+mailboxes locally on the server.
+
+**Note: as usual, the preferred Linux distribution here is ArchLinux.**
+
+# Dovecot
+
+After installing dovecot, there are a few steps to have a somewhat secure and
+operational installation:
+
+* configure SSL to get IMAPS
+* configure the authentication
+* configure dovecot
+* start dovecot
+
+## SSL
+
+I should have written an article about that before, because I do not remember
+the exact procedure but it turns out I already have a key and certificates for
+my server (thanks to [StartSSL](https://www.startssl.com/) who gives free SSL
+certifications). I use them to provide a https access (e.g. for this website)
+with lighttpd. What I already had in `/etc/lighttpd/ssl` were the following
+files:
+
+    porquet.org.key
+    porquet.org.crt
+    sub.class1.server.ca.pem
+    ca.pem
+    ca-certs.crt
+
+* `porquet.org.key` contains the private key for my domain.
+* `porquet.org.crt` contains the public certificate for porquet.org followed by
+  the content of `porquet.org.key`. It is the file I give to lighttpd as
+  `ssl.pemfile`.
+* `sub.class1.server.ca.pem` is the intermediate CA certificate (provided by
+  StartSSL).
+* `ca.pem` is startcom root CA certificate (also provided by StartSSL).
+* `ca-certs.crt` contains the content of `sub.class1.server.ca.pem` and
+  `ca.pem` (the order matters). It is the file I give to lighttpd as
+  `ssl.ca-file`.
+
+Dovecot wants pretty the same information, but organized slightly differently.
+It wants the key alone, and one another file containing all the chain of public
+certificates. I already had the key alone (`porquet.org.key`) and I created
+another file that I called `imap.porquet.org.crt` in which I put, in order, the
+public certificate for my domain (originally contained in `porquet.org.crt`),
+followed by the content of `ca-certs.crt`.
+
+## Authentication
+
+Dovecot offers tons of possibility for the authentication of clients, i.e. when
+my laptop or android initiate a connection with dovecot. The simplest solution
+was to use the system users, but I did not want to use the same password as the
+one I use for accessing my server via SSH (even if supposedly SSL steps in
+first, before transmitting the password).
+
+So I used the [Passwd-file](http://wiki2.dovecot.org/AuthDatabase/PasswdFile)
+backend. It means you have to create a file, on the same format as
+`/etc/passwd` (or `/etc/shadow`), and specify allowed users along with their
+passwords. Not to complicate things too much, I used the same username for
+myself as my system user.
+
+Create a file in `/etc/dovecot/auth/passwd`, and add lines to specify allowed users:
+
+    $ cat /etc/dovecot/auth/passwd
+    joel:{SHA512-CRYPT}$6$..............
+
+The password is automatically generated with the `doveadm` tool:
+
+    $ doveadm pw -s SHA512-CRYPT
+
+## Dovecot global configuration
+
+On ArchLinux, sample configurations are kept in
+`/usr/share/doc/dovecot/example-config`. Copy everything in `/etc/dovecot` and
+modify what suits your needs. To know the current configuration, dovecot
+provides an awesome option that summarizes it for you in a simple way (as well
+as giving potential errors in the configuration files):
+
+    $ doveconf -n
+
+Mine looks like (I included comments in the output to explain certain options a
+bit):
+
+    # On ArchLinux, this path already exists for serving mails locally
+    mail_location = maildir:/var/spool/mail/%u
+
+    # Create the main Inbox folder, as well as a few other useful folders
+    namespace inbox {
+      inbox = yes
+      location =
+      mailbox Drafts {
+        auto = create
+        special_use = \Drafts
+      }
+      mailbox Junk {
+        auto = create
+        special_use = \Junk
+      }
+      mailbox Sent {
+        auto = create
+        special_use = \Sent
+      }
+      mailbox Trash {
+        auto = create
+        special_use = \Trash
+      }
+      prefix =
+    }
+
+    # Authentication database: use the passwd-file approach described above
+    passdb {
+      args = scheme=CRYPT /etc/dovecot/auth/passwd
+      driver = passwd-file
+    }
+
+    # Specify an email address where unknown emails should be delivered (it is
+    # necessary to declare one, when dovecot receives emails by getmail)
+    postmaster_address = joel@porquet.org
+
+    # The only protocol that we serve is IMAPS. Non-SSL IMAP is deactived
+    # because its listening port is 0
+    protocols = imap
+    service imap-login {
+      inet_listener imap {
+        port = 0
+      }
+      inet_listener imaps {
+        port = 993
+        ssl = yes
+      }
+    }
+
+    # SSL is required, and we give the chain of certificates as well as the
+    # private key
+    ssl = required
+    ssl_cert = </etc/lighttpd/ssl/imap.porquet.org.crt
+    ssl_key = </etc/lighttpd/ssl/porquet.org.key
+
+    # After the authentication step, dovecot uses the regular system users of
+    # the server
+    userdb {
+      args = blocking=no
+      driver = passwd
+    }
+
+## Start dovecot
+
+You should now be able to start dovecot, using `systemd` if you are with ArchLinux.
+
+    # systemctl start dovecot
+
+You should also be able to configure your email client, and give the address of
+your IMAPS server, your username and password (the one defined in
+`/etc/dovecot/auth/passwd`, not the system one defined in `etc/passwd`!). And
+you should see the mailboxes that are present on the server: Inbox, Sent,
+Drafts, etc.
+
+Normally you can already send emails, by setting up the address of the external
+SMTP server.
+
+But now is time to actually receive emails!
+
+# Getmail
+
+The work that getmail will do is to retrieve emails from OVH mailboxes and
+deliver them to dovecot, so that dovecot can in turn deliver them to the
+various email clients.
+
+## Configuration
+
+Contrarily to most of examples, I decided to configure getmail in a
+*system-wide* way.
+
+I started by creating a new folder `/etc/getmail`. In this new location, I
+created a folder named `joel@porquet.org` that belongs to my system user. And
+finally, in this folder, I created a configuration file for getmail (comments
+are inline):
+
+    $ cat /etc/getmail/joel@porquet.org/getmailrc
+
+    [retriever]
+    type = SimpleIMAPSSLRetriever
+    server = ssl0.ovh.net
+    port = 993
+    username = XXX
+    password = XXX
+    mailboxes = ALL
+
+    [destination]
+    type = MDA_external
+    # -e: make dovecot return an error if necessary
+    path = /usr/lib/dovecot/deliver
+    arguments = ("-e",)
+
+    [options]
+    # retrieve only new emails
+    read_all = false
+    # delete on server after x days
+    delete_after = 30
+    # do not add a Delivered-To: header field
+    delivered_to = false
+    # do not add a Received: header field
+    received = false
+
+## Startup
+
+At first, you can try your new installation (and see the error messages if
+there is any) by starting getmail directly in a shell:
+
+    $ getmail --getmaildir=/etc/getmail/joel@porquet.org --idle INBOX
+
+* the option `--getmaildir` tells getmail to fetch its configuration file
+  (`getmailrc`) is the specified directory, instead of `.getmail` which is the
+  default one.
+* the option `--idle INBOX` asks getmail to enter in a IDLE loop instead of
+  exiting after fetching emails. This is how IMAP IDLE (i.e. push email) is
+  implemented.
+
+Try to send yourself an email and check that the email go through getmail, then
+dovecot and finally arrives in your email client!
+
+## Systemd
+
+Now that everything works perfectly, we can make getmail a systemd service so
+it is started automatically at boot.
+
+Create a new systemd service, in `/etc/systemd/system`:
+
+    $ cat /etc/systemd/system/getmail@joel.service
+
+    [Unit]
+    Description=Getmail for joel@porquet.org
+    Wants=dovecot.service
+    After=dovecot.service
+
+    [Service]
+    User=joel
+    ExecStart=/usr/bin/getmail --getmaildir=/etc/getmail/joel@porquet.org --idle INBOX
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+
+Start and enable this new service (log messages will then be accessible via
+journactl):
+
+    # systemctl enable getmail@joel.service
+    # systemctl start getmail@joel.service
+
+Now, enjoy your new email server!
