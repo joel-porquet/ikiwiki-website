@@ -20,6 +20,14 @@ Marie Curie ([UPMC](http://www.upmc.fr/en)).
 
 # Spring 2010
 
+*   #### M1: supervision of two student projects
+    - "Implementation of the writing support for the FAT filesystem in
+      [MutekH](http://www.mutekh.org)", by [Mohamed
+      Karaoui](http://www.lip6.fr/actualite/personnes-fiche.php?ident=D1361&LANG=en)
+    - "Implementation of the ext2 filesystem in
+      [MutekH](http://www.mutekh.org)", by [Alexandre
+      Brière](http://www.lip6.fr/actualite/personnes-fiche.php?ident=D1369&LANG=en)
+
 *   #### L2: Data types and structures
     Tutorial and lab sessions, 43h
 
