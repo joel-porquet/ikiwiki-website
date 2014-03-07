@@ -1,25 +1,25 @@
 [[!meta title="IMAPS gateway with getmail and dovecot"]]
 [[!tag getmail dovecot archlinux]]
 
-It had been a while I wanted to have another solution for emails than Gmail.
-Especially because I am currently working on the Linux Kernel and at some point
-I would like to submit a few patches eventually. Unfortunately, it is
-impossible to use Gmail for sending them or even, to a greater extend, to be
-involved in the LKML.
+It had been a while I wanted to have another solution for hosting and serving
+emails than Gmail.  Especially because I am currently working on the Linux
+Kernel and at some point I would like to submit a few patches.  Unfortunately,
+it is impossible to use Gmail for sending patches or even, to a greater extend,
+to be involved in the LKML.
 
 Also I think it is pretty fancy (nerdy?) to have my own email address, i.e.
 `joel@porquet.org`.
 
 At the same time, I have always heard that managing a full email stack (from
-the *mx* DNS records up to the IMAP and SMTP servers) is a pain. It can
+the mx DNS records up to the IMAP and SMTP servers) is a pain. It can
 definitely happen that my server is down for a few days which would mean that
 my emails would be inaccessible in the meantime.
 
-That is why I had this idea of using a stable frontend (i.e. OVH, my hosting
-service company) before my email server, so that whenever my server is down, I
-can still access my emails through this frontend. One could argue that I could
-just use the email server that OVH provides but there are (at least) two
-reasons I do not want to:
+That is why I had this idea of using a stable frontend (i.e. via OVH, my
+hosting service company) before my own email server, so that whenever my server
+is down, I can still access my emails through this frontend. One could argue
+that I could just use the email facility that OVH provides but there are (at
+least) two reasons I prefer not to:
 
 * The mailbox OVH offers me is only 2G in size, which is fairly small nowadays.
 * I would like to manage my own data (I like the cloud, but only if it is
@@ -27,7 +27,7 @@ reasons I do not want to:
 
 Here is a picture of what I wanted to achieve (thanks to
 [Asciiflow](http://www.asciiflow.com/#Draw) for the following ASCII Flow
-Diagram!):
+Diagram):
 
     +-----------+              +-----------+               +--------------+
     | OVH       |              | MYSERVER  |               | LAPTOP       |
@@ -44,24 +44,24 @@ Diagram!):
 In a few words:
 
 * OVH gives me the stable frontend. Whenever my server is down, I can still
-  send emails through their STMP server, and I can still receive emails (they
-  provide IMAP access as well as a RoundCube webmail).
+  send emails through their STMP server and most of all I can still receive
+  emails (they provide IMAP access as well as a RoundCube webmail).
 * If everything goes fine, then the emails are retrieved on my server (ideally
-  using IMAP IDLE to minimize the communications) and deleted on OVH mailbox
-  (we will see later how we can actually have a backup of X days on OVH, so
-  that if my server is down, I still have access to the most recent received
-  emails on OVH).
+  using IMAP IDLE to minimize the communications) and deleted on OVH inbox (we
+  will see later how we can actually have a backup of X days on OVH, so that if
+  my server is down, I still have access to the most recent received emails on
+  OVH).
 * My server offers a IMAPS access to my clients (laptop, android, etc.), also
   supporting IMAP IDLE.
 * The clients are synchronized with the server so all my emails are accessible
   offline (at least on my laptop; for android, I would limit the
-  synchronization to a certain number of days)
+  synchronization to a certain number of days).
 * The clients use the STMP server provided by OVH directly.
 
 Everything pretty much relies on two (great) pieces of software:
 [getmail](http://pyropus.ca/software/getmail/) and
 [dovecot](http://www.dovecot.org/). Getmail will be in charge of fetching the
-emails from the OVH mailbox (using IMAP IDLE), and delivering them to dovecot.
+emails from OVH inbox (using IMAP IDLE), and delivering them to dovecot.
 Dovecot will service the IMAPS access to the clients, as well as managing the
 mailboxes locally on the server.
 
@@ -80,10 +80,10 @@ operational installation:
 ## SSL
 
 I should have written an article about that before, because I do not remember
-the exact procedure but it turns out I already have a key and certificates for
+the exact procedure, but it turns out I already have a key and certificates for
 my server (thanks to [StartSSL](https://www.startssl.com/) who gives free SSL
-certifications). I use them to provide a https access (e.g. for this website)
-with lighttpd. What I already had in `/etc/lighttpd/ssl` were the following
+certifications). I use them to provide a *https* access through lighttpd (e.g.
+for this website). What I already had in `/etc/lighttpd/ssl` were the following
 files:
 
     porquet.org.key
@@ -98,17 +98,17 @@ files:
   `ssl.pemfile`.
 * `sub.class1.server.ca.pem` is the intermediate CA certificate (provided by
   StartSSL).
-* `ca.pem` is startcom root CA certificate (also provided by StartSSL).
+* `ca.pem` is the startcom root CA certificate (also provided by StartSSL).
 * `ca-certs.crt` contains the content of `sub.class1.server.ca.pem` and
   `ca.pem` (the order matters). It is the file I give to lighttpd as
   `ssl.ca-file`.
 
-Dovecot wants pretty the same information, but organized slightly differently.
-It wants the key alone, and one another file containing all the chain of public
-certificates. I already had the key alone (`porquet.org.key`) and I created
-another file that I called `imap.porquet.org.crt` in which I put, in order, the
-public certificate for my domain (originally contained in `porquet.org.crt`),
-followed by the content of `ca-certs.crt`.
+Dovecot needs pretty much the same information, but organized slightly
+differently.  It wants the key alone, and one another file containing all the
+chain of public certificates. I already had the key alone (`porquet.org.key`)
+but I had to create another file that I called `imap.porquet.org.crt` in which
+I put, in order, the public certificate for my domain (originally contained in
+`porquet.org.crt`), followed by the content of `ca-certs.crt`.
 
 ## Authentication
 
@@ -119,9 +119,9 @@ one I use for accessing my server via SSH (even if supposedly SSL steps in
 first, before transmitting the password).
 
 So I used the [Passwd-file](http://wiki2.dovecot.org/AuthDatabase/PasswdFile)
-backend. It means you have to create a file, on the same format as
+backend. It means you have to create a file, with the same format as
 `/etc/passwd` (or `/etc/shadow`), and specify allowed users along with their
-passwords. Not to complicate things too much, I used the same username for
+password. Not to complicate things too much, I used the same username for
 myself as my system user.
 
 Create a file in `/etc/dovecot/auth/passwd`, and add lines to specify allowed users:
@@ -137,9 +137,9 @@ The password is automatically generated with the `doveadm` tool:
 
 On ArchLinux, sample configurations are kept in
 `/usr/share/doc/dovecot/example-config`. Copy everything in `/etc/dovecot` and
-modify what suits your needs. To know the current configuration, dovecot
-provides an awesome option that summarizes it for you in a simple way (as well
-as giving potential errors in the configuration files):
+modify the configuration so it suits your needs. To know the current
+configuration, dovecot provides an awesome option that summarizes it for you in
+a simple way (as well as giving potential configuration errors):
 
     $ doveconf -n
 
@@ -210,15 +210,16 @@ bit):
 
 ## Start dovecot
 
-You should now be able to start dovecot, using `systemd` if you are with ArchLinux.
+You should now be able to start dovecot, using `systemd` if you are with
+ArchLinux:
 
     # systemctl start dovecot
 
 You should also be able to configure your email client, and give the address of
 your IMAPS server, your username and password (the one defined in
-`/etc/dovecot/auth/passwd`, not the system one defined in `etc/passwd`!). And
-you should see the mailboxes that are present on the server: Inbox, Sent,
-Drafts, etc.
+`/etc/dovecot/auth/passwd`, not the system one defined in `etc/passwd`!) And
+you should see the mailboxes that are present on the server: namely Inbox,
+Sent, Drafts, etc.
 
 Normally you can already send emails, by setting up the address of the external
 SMTP server.
@@ -227,9 +228,9 @@ But now is time to actually receive emails!
 
 # Getmail
 
-The work that getmail will do is to retrieve emails from OVH mailboxes and
-deliver them to dovecot, so that dovecot can in turn deliver them to the
-various email clients.
+The work that getmail will do is to retrieve emails from OVH inbox and deliver
+them to dovecot, so that dovecot can in turn deliver them to the various email
+clients.
 
 ## Configuration
 
@@ -275,8 +276,8 @@ there is any) by starting getmail directly in a shell:
     $ getmail --getmaildir=/etc/getmail/joel@porquet.org --idle INBOX
 
 * the option `--getmaildir` tells getmail to fetch its configuration file
-  (`getmailrc`) is the specified directory, instead of `.getmail` which is the
-  default one.
+  (`getmailrc`) is the specified directory, instead of `~/.getmail` which is
+  the default one.
 * the option `--idle INBOX` asks getmail to enter in a IDLE loop instead of
   exiting after fetching emails. This is how IMAP IDLE (i.e. push email) is
   implemented.
