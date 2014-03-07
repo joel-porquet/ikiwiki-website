@@ -1,0 +1,4 @@
+[[!meta title="pages tagged dovecot"]]
+
+[[!inline pages="tagged(dovecot)" actions="no" archive="yes"
+feedshow=10]]
