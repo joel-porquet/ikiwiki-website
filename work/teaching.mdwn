@@ -49,6 +49,6 @@ Marie Curie ([UPMC](http://www.upmc.fr/en)).
 
 *   #### M2: Software application mapping on MPSoC
     Lecture and lab sessions, 27h<br />
-    *Re-formatted all the lecture material and lab assignements, and put them
-    in a Trac instance*<br />
+    *Re-formatted all the lecture material and lab assignments, and put them in
+    a Trac instance*<br />
     (fr) [link](https://www-soc.lip6.fr/trac/sesi-mjpeg)
