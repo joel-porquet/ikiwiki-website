@@ -1,0 +1,4 @@
+[[!meta title="pages tagged C"]]
+
+[[!inline pages="tagged(C)" actions="no" archive="yes"
+feedshow=10]]
