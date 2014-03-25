@@ -1,0 +1,21 @@
+[[!meta title="Tips in language C"]]
+[[!tag C]]
+
+## Get the length of a constant string/array
+
+In C, it can be useful to know the length of a statically declared array or
+string. But for example, for strings, using the function `strlen()` to get that
+length can induce a big overhead because the length of the string will be
+determined at runtime by actually computing it. In such cases, we can directly
+use `sizeof()` but only if the declaration makes it explicit that it is an
+array and not a pointer. Here is an example:
+
+    static const char *my_string = "mystring";
+    -> sizeof(my_string) => 8 (i.e. size of a pointer on a 64-bit architecture)
+
+    static const char my_string[] = "mystring";
+    -> sizeof(my_string) => 9 (i.e. length of my_string including the null character)
+
+Look at the
+[gnu-c-manual](http://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#The-sizeof-Operator)
+for more details.
