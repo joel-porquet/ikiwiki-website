@@ -1,0 +1,80 @@
+[[!meta title="Tips in LaTeX"]]
+[[!tag LaTeX]]
+
+## Automatic generation of exams and solutions
+
+As a [[teacher|work/teaching]], it so happens that often I have to write exams.
+For that I use the powerful LaTeX, but even though there are already quite a
+few exam classes out there, I usually find them to bloated.
+
+That is why I came up with my own solution to write exams. In my solution, you
+write only one source file, containing both questions and solutions, and you
+get two outputs automatically: the teacher's version with the solution, and the
+students' version without the solution but with empty boxes instead so they can
+fill in their answers directly on the document.
+
+### The environment that does it all
+
+First of all, for the new environment to work, you have to include one extra
+package, the `ifthen` package. This package makes it possible to distinguish
+between the teacher's and the students' versions of the document.
+
+Now the new environment that you have to define at the beginning of the
+document (i.e. before the `\begin{document}`) is as follows:
+
+    \makeatletter\newenvironment{solution}[1]{%
+        \ifthenelse{\isundefined{\teacher}}{%
+        \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1}\end{minipage}}%
+        }{}%
+    	\begin{lrbox}{\@tempboxa}\begin{minipage}{\linewidth}%
+    }{%
+    	\end{minipage}\end{lrbox}%
+    		\ifthenelse{\not\isundefined{\teacher}}{%
+    			\medskip%
+    			\framebox{\usebox{\@tempboxa}}%
+    			\medskip%
+    		}{}%
+    }\makeatother
+
+Basically, everything that is contained between `\begin{solution}` and
+`\end{solution}` commands, will only be displayed in the teacher's version. In
+the students' version, the environment takes an argument, which is the vertical
+space that the empty box should take on the document (so that students can
+write down their answer).
+
+### Usage
+
+Here is an example of using this new environment (taken for a real exam):
+
+    \paragraph{Question #1 (1 point)} What are the three general-purpose
+    registers of a MIPS32 processor that the kernel does not have to save when
+    context switching?
+
+    \begin{correction}{5cm}
+        $26, $27 et $0.
+    \end{correction}
+
+In the teacher's version, we will see the solution in a box that fits the
+answer. In the students' version, they have an empty box of 5cm in height to
+propose their answer.
+
+### Makefile
+
+Now we have to write a Makefile that will automatically generate both the
+teacher's and the students' versions.
+
+Assuming that the document is called `exam.tex`, here is a simple Makefile that
+would work:
+
+    SRC_BASE=exam
+
+    all: $(SRC_BASE)_students.pdf $(SRC_BASE)_teacher.pdf
+
+    %_students.pdf: %.tex
+    	pdflatex -jobname $*_students $<
+
+    %_teacher.pdf: %.tex
+    	pdflatex -jobname $*_teacher "\def\teacher{true} \include{$*}"
+
+Enjoy!
+
