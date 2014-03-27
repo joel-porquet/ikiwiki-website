@@ -45,7 +45,7 @@ write down their answer).
 
 ### Usage
 
-Here is an example of using this new environment (taken for a real exam):
+Here is an example of using this new environment (extracted from a real test):
 
     \paragraph{Question #1 (1 point)} What are the three general-purpose
     registers of a MIPS32 processor that the kernel does not have to save when
@@ -56,8 +56,8 @@ Here is an example of using this new environment (taken for a real exam):
     \end{solution}
 
 In the teacher's version, we will see the solution in a box that fits the
-answer. In the students' version, they have an empty box of 5cm in height to
-propose their answer.
+answer. But in the students' version, they just have an empty box of 5cm in
+height to propose their answer.
 
 ### Makefile
 
@@ -84,17 +84,15 @@ Enjoy!
 Let us look further at the definition of this new environment. As explained on
 the [LaTeX
 wikibook](http://en.wikibooks.org/wiki/LaTeX/Macros#New_Environments), a
-`newenvironment` command is cut into several arguments:
+`newenvironment` command receives several arguments:
 
     \newenvironment{name}[num]{before}{after}
 
 * `name` is the name of the environment
 * `num` is the optional number of arguments accepted by the environment (in our
   case, the height of the box)
-* `before` is what is processed when encountering a `\begin{name}` related to
-  the environment
-* `after` is what is processed when encountering a `\end{name}` related to the
-  environment
+* `before` is what is processed when encountering a `\begin{name}`
+* `after` is what is processed when encountering a `\end{name}`
 
 #### Understanding the teacher's version
 
@@ -118,10 +116,10 @@ Basically, when encountering a `\begin{solution}`, we will create a `lrbox`
 in width (`linewidth`). In the `after` part, we close the `minipage` and the
 `lrbox`. Now the interesting thing is that `lrbox` actually saves all the text
 that is between our `\begin{solution}` and `\end{solution}` in the temporary
-object that was defined with `\newbox`.
+object, `\tempbox`, that was defined with `\newbox`.
 
 The `lrbox` environment does not print anything until invoked. And this is
-exactly what we do, when declaring a `\fbox` in which we finally print the
+exactly what we do when declaring a `\fbox`, in which we finally print the
 content of the saved `lrbox` by calling `\usebox` with the corresponding name.
 
 If we recall the example above, the environment would be fully expanded as
@@ -150,7 +148,8 @@ macro will be expanded as follow:
 
 So now, when encountering a `\begin{solution}`, we will create a `fbox` (framed
 box) in which we define a `minipage`. The `minipage` takes a full line in width
-(`linewidth`), and contains a vertical space of the argument (`\vspace*{#1}`).
+(`linewidth`), and contains a vertical space specified by the argument
+(`\vspace*{#1}`).
 
 The second line creates a `lrbox` that saves all the text that is between our
 `\begin{solution}` and `\end{solution}`. Contrarily to the teacher's version
