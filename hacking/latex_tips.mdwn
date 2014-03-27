@@ -22,19 +22,20 @@ between the teacher's and the students' versions of the document.
 Now the new environment that you have to define at the beginning of the
 document (i.e. before the `\begin{document}`) is as follows:
 
-    \makeatletter\newenvironment{solution}[1]{%
+    \newenvironment{solution}[1]{%
         \ifthenelse{\isundefined{\teacher}}{%
-        \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1}\end{minipage}}%
+            \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1}\end{minipage}}%
         }{}%
-    	\begin{lrbox}{\@tempboxa}\begin{minipage}{\linewidth}%
+        \newbox\tempbox%
+        \begin{lrbox}{\tempbox}\begin{minipage}{\linewidth}%
     }{%
-    	\end{minipage}\end{lrbox}%
-    		\ifthenelse{\not\isundefined{\teacher}}{%
-    			\medskip%
-    			\framebox{\usebox{\@tempboxa}}%
-    			\medskip%
-    		}{}%
-    }\makeatother
+        \end{minipage}\end{lrbox}%
+        \ifthenelse{\not\isundefined{\teacher}}{%
+            \medskip%
+            \fbox{\usebox{\tempbox}}%
+            \medskip%
+        }{}%
+    }
 
 Basically, everything that is contained between `\begin{solution}` and
 `\end{solution}` commands, will only be displayed in the teacher's version. In
@@ -50,9 +51,9 @@ Here is an example of using this new environment (taken for a real exam):
     registers of a MIPS32 processor that the kernel does not have to save when
     context switching?
 
-    \begin{correction}{5cm}
+    \begin{solution}{5cm}
         $26, $27 et $0.
-    \end{correction}
+    \end{solution}
 
 In the teacher's version, we will see the solution in a box that fits the
 answer. In the students' version, they have an empty box of 5cm in height to
@@ -77,4 +78,93 @@ would work:
     	pdflatex -jobname $*_teacher "\def\teacher{true} \include{$*}"
 
 Enjoy!
+
+### Further explanations
+
+Let us look further at the definition of this new environment. As explained on
+the [LaTeX
+wikibook](http://en.wikibooks.org/wiki/LaTeX/Macros#New_Environments), a
+`newenvironment` command is cut into several arguments:
+
+    \newenvironment{name}[num]{before}{after}
+
+* `name` is the name of the environment
+* `num` is the optional number of arguments accepted by the environment (in our
+  case, the height of the box)
+* `before` is what is processed when encountering a `\begin{name}` related to
+  the environment
+* `after` is what is processed when encountering a `\end{name}` related to the
+  environment
+
+#### Understanding the teacher's version
+
+When in teacher's version, meaning `\teacher` is defined (see Makefile above to
+understand how), the environment macro will be expanded as follows (notice that
+since `\isdefined` does not seem to exist, we had to use `\not\isundefined` to
+perform the same condition):
+
+    \newenvironment{solution}[1]{%
+        \newbox\tempbox%
+        \begin{lrbox}{\tempbox}\begin{minipage}{\linewidth}%
+    }{%
+        \end{minipage}\end{lrbox}%
+        \medskip%
+        \fbox{\usebox{\tempbox}}%
+        \medskip%
+    }
+
+Basically, when encountering a `\begin{solution}`, we will create a `lrbox`
+(save box) in which we define a `minipage`. The `minipage` occupies a full line
+in width (`linewidth`). In the `after` part, we close the `minipage` and the
+`lrbox`. Now the interesting thing is that `lrbox` actually saves all the text
+that is between our `\begin{solution}` and `\end{solution}` in the temporary
+object that was defined with `\newbox`.
+
+The `lrbox` environment does not print anything until invoked. And this is
+exactly what we do, when declaring a `\fbox` in which we finally print the
+content of the saved `lrbox` by calling `\usebox` with the corresponding name.
+
+If we recall the example above, the environment would be fully expanded as
+follows:
+
+    \medskip
+    \fbox{
+        \begin{minipage}{\linewidth}
+            $26, $27 et $0.
+        \end{minipage}
+    }
+    \medskip
+
+#### Understanding the students' version
+
+When in students' version, meaning `\teacher` is not defined, the environment
+macro will be expanded as follow:
+
+    \newenvironment{solution}[1]{%
+        \fbox{\begin{minipage}{\linewidth}\hfill\vspace*{#1}\end{minipage}}%
+        \newbox\tempbox%
+        \begin{lrbox}{\tempbox}\begin{minipage}{\linewidth}%
+    }{%
+        \end{minipage}\end{lrbox}%
+    }
+
+So now, when encountering a `\begin{solution}`, we will create a `fbox` (framed
+box) in which we define a `minipage`. The `minipage` takes a full line in width
+(`linewidth`), and contains a vertical space of the argument (`\vspace*{#1}`).
+
+The second line creates a `lrbox` that saves all the text that is between our
+`\begin{solution}` and `\end{solution}`. Contrarily to the teacher's version
+though, in the `after` part, we just close the `minipage` and the `lrbox` but
+we do not invoke what we saved in the `lrbox` which means the solution is not
+displayed.
+
+If we recall the example above, the environment would be fully expanded as
+follows:
+
+    \fbox{
+        \begin{minipage}{\linewidth}
+            \hfill
+            \vspace*{5cm}
+        \end{minipage}
+    }
 
