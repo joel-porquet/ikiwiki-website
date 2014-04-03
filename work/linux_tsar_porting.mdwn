@@ -1,0 +1,20 @@
+[[!meta title="Porting Linux on the TSAR architecture"]]
+
+# TSAR
+
+TSAR (aka Tera-Scale ARchitecture) is an European MEDEA project, led by BULL.
+It aims at developing a scalable, coherent shared-memory, multi-core
+architecture.
+
+More information on TSAR [website](https://www-soc.lip6.fr/trac/tsar).
+
+# Linux
+
+The support for the TSAR architecture can be found
+[here](https://joel.porquet.org/cgit/cgit.cgi/linux.git/).
+
+# uClibc
+
+The support for the TSAR architecture can be found
+[here](https://joel.porquet.org/cgit/cgit.cgi/uclibc.git/).
+
