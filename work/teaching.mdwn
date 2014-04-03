@@ -10,7 +10,8 @@ Marie Curie ([UPMC](http://www.upmc.fr/en)).
 # Fall 2013
 
 *   #### L3: Software and hardware architecture of computers
-    Tutorial and lab sessions, 44h
+    Tutorial and lab sessions, 44h<br />
+    *Same as Fall 2010*
 
 *   #### M1: SystemC
     Lecture and lab sessions, 20h<br />
