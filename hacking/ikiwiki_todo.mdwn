@@ -1,0 +1,96 @@
+[[!meta title="Todo plugin for Ikiwiki"]]
+[[!tag ikiwiki]]
+
+## Introduction
+
+This plugin enables marking pages as todo pages, thanks to a new directive. A
+deadline can also be specified if the todo page is associated with a date.
+
+It can then be used in [PageSpec](https://ikiwiki.info/ikiwiki/pagespec/) to
+only select todo pages, and also in
+[SortSpec](https://ikiwiki.info/ikiwiki/pagespec/sorting/) to sort todo pages
+by deadline dates.
+
+This plugin is thus perfect for pages dealing with a certain project, for which
+a todo list of tasks has to maintained.
+
+## Todo directive
+
+To mark a page as todo page, you have to write the following directive
+somewhere in the page (usually at the top of it):
+
+    [[!todo]]
+
+If a deadline is associated with a deadline date, then provide also the date as
+a string, in any format the [Date::Parse](search.cpan.org/perldoc/Date::Parse)
+perl module can understand:
+
+    [[!todo deadline="3 April 1982"]]
+
+When the todo task is done, then mark it as such:
+
+    [[!todo deadline="3 April 1982" done="yes"]]
+
+## PageSpec and SortSpec
+
+Now, you can select all the todo pages (not done) existing in your wiki:
+
+    [[!inline pages="* and todo() and !todo(done)" archive="yes"]]
+
+If you want to sort them by deadline dates:
+
+    [[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)"]]
+
+If you want the list of todo pages that are marked as done:
+
+    [[!inline pages="* and todo() and todo(done)" archive="yes" sort="todo(deadline)"]]
+
+If you want the list of pages that are not todo pages:
+
+    [[!inline pages="* and !todo()" archive="yes"]]
+
+## Template
+
+The plugin exports two template parameters, to be used in template pages:
+
+* `tododone`, which gives the information of whether the todo page is marked as
+  done or not.
+* `tododeadline` which gives the deadline date as a string.
+
+A possible example for a template page could be:
+
+[[!toggle id=template text="Template"]]
+[[!toggleable id=template text="""
+    <ul>
+    <li>
+
+    <TMPL_IF TODODEADLINE>
+    <tt>
+    <TMPL_VAR TODODEADLINE>: 
+    </tt>
+    </TMPL_IF>
+
+    <TMPL_IF PERMALINK>
+    <a href="<TMPL_VAR PERMALINK>"><TMPL_VAR TITLE></a>
+    <TMPL_ELSE>
+    <a href="<TMPL_VAR PAGEURL>"><TMPL_VAR TITLE></a>
+    </TMPL_IF>
+
+    </li>
+    </ul>
+"""]]
+
+You can name this file `todopage.tmpl` and place it in your `templates`
+directory, at the root of your ikiwiki.
+
+Now you can use when listing todo pages:
+
+    [[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)" template="todopage"]]
+
+## Source code
+
+The code of the plugin can be found here:
+<https://joel.porquet.org/cgit/cgit.cgi/iki-resources.git/tree/IkiWiki/Plugin/todo.pm>
+
+The code of a possible template can be found here:
+<https://joel.porquet.org/cgit/cgit.cgi/iki-resources.git/tree/templates/todopage.tmpl>
