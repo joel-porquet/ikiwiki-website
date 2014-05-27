@@ -1,6 +1,14 @@
 [[!meta title="Todo plugin for Ikiwiki"]]
 [[!tag ikiwiki]]
 
+Originally, in [ikiwiki](http://ikiwiki.info), the creator maintains lists of
+todo pages by placing them in a `todo` folder. When those todo items are done,
+they must link to a `done` subpage.
+
+I found this behavior quite annoying since I didn't want to have only one todo
+folder containing all my todo items, and also I wanted to be able to add a
+deadline dates to those items.
+
 ## Introduction
 
 This plugin enables marking pages as todo pages, thanks to a new directive. A
