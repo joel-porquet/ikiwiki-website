@@ -9,6 +9,9 @@ I found this behavior quite annoying since I didn't want to have only one todo
 folder containing all my todo items, and also I wanted to be able to add a
 deadline dates to those items.
 
+You can find my plugin on the [ikiwiki official
+website](http://ikiwiki.info/plugins/contrib/todo/).
+
 ## Introduction
 
 This plugin enables marking pages as todo pages, thanks to a new directive. A
