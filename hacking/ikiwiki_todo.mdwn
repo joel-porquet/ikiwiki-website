@@ -19,35 +19,36 @@ a todo list of tasks has to maintained.
 To mark a page as todo page, you have to write the following directive
 somewhere in the page (usually at the top of it):
 
-    [[!todo]]
+    \[[!todo]]
 
 If a deadline is associated with a deadline date, then provide also the date as
-a string, in any format the [Date::Parse](search.cpan.org/perldoc/Date::Parse)
-perl module can understand:
+a string, in any format the
+[Date::Parse](http://search.cpan.org/perldoc/Date::Parse) perl module can
+understand:
 
-    [[!todo deadline="3 April 1982"]]
+    \[[!todo deadline="3 April 1982"]]
 
 When the todo task is done, then mark it as such:
 
-    [[!todo deadline="3 April 1982" done="yes"]]
+    \[[!todo deadline="3 April 1982" done="yes"]]
 
 ## PageSpec and SortSpec
 
 Now, you can select all the todo pages (not done) existing in your wiki:
 
-    [[!inline pages="* and todo() and !todo(done)" archive="yes"]]
+    \[[!inline pages="* and todo() and !todo(done)" archive="yes"]]
 
 If you want to sort them by deadline dates:
 
-    [[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)"]]
+    \[[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)"]]
 
 If you want the list of todo pages that are marked as done:
 
-    [[!inline pages="* and todo() and todo(done)" archive="yes" sort="todo(deadline)"]]
+    \[[!inline pages="* and todo() and todo(done)" archive="yes" sort="todo(deadline)"]]
 
 If you want the list of pages that are not todo pages:
 
-    [[!inline pages="* and !todo()" archive="yes"]]
+    \[[!inline pages="* and !todo()" archive="yes"]]
 
 ## Template
 
@@ -85,7 +86,7 @@ directory, at the root of your ikiwiki.
 
 Now you can use when listing todo pages:
 
-    [[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)" template="todopage"]]
+    \[[!inline pages="* and todo() and !todo(done)" archive="yes" sort="todo(deadline)" template="todopage"]]
 
 ## Source code
 
