@@ -1,0 +1,142 @@
+[[!meta title="How to send POST http requests using Python"]]
+[[!tag python]]
+
+## Introduction
+
+Recently, I had to get a very important document on some website. The website
+was asking for an unique identifier and my birth date, which were supposed to
+give me access to this document. Unfortunately, I had been given me a wrong
+identifier and the website was keeping giving me an error message, preventing
+me from accessing this document.
+
+Anyway, I quickly realized that the identifier were actually given in a
+sequential manner. The first time I had been given a identifier, which was
+working, it was ending with the number 76656. And a few weeks later, the second
+time, when they gave me the erroneous identifier, it was ending with the number
+79025.
+
+I thus decided I would write a quick script, using Python to be cool, and try
+all the number between the one that had worked a few weeks before, and slightly
+above the wrong number that they had given me, hoping the right number would
+show up somewhere in between.
+
+## Understanding the website
+
+First, I went on the website and looked at the source code. The idea was to
+understand which `input` tags were used for the form.
+
+Here is an example of what the source code could look like. I only kept the
+interesting part, which is what is between the `form` tags, and more
+specifically the `input` tags.
+
+    <form method="post" action="login.aspx" id="form1">
+
+    <div class="aspNetHidden">
+        <input type="hidden" name="VIEWSTATE" id="VIEWSTATE" value="/wEPC5+FkhyN" />
+    </div>
+
+    <div class="aspNetHidden">
+        <input type="hidden" name="EVENTVALIDATION" id="EVENTVALIDATION" value="/wEdAAJD5PYw==" />
+    </div>
+
+    <div class="Background">
+        <input name="identifier" type="text" id="identifier" />
+        <input name="birthdate" type="text" id="birthdate" />
+
+        <input id="RadioButton1" type="radio" name="radiobutton" value="RadioButton1" checked="checked" />
+        <input id="RadioButton2" type="radio" name="radiobutton" value="RadioButton2" />
+        <input type="submit" name="validate" value="Validate" id="Validate" />
+    </div>
+
+    </form>
+
+We also need the proper url. In this case, let's assume the url is:
+http://shittywebsite.com/stelar/login.aspx
+
+## The python script
+
+First, let's define the `input` tags that we found in the website as a
+dictionary. The name of the `input` is the actual `name` field, e.g.
+"radiobutton" for both the radio input tags.
+
+For the identifier, we can specify 0 for now since it's a value we
+will modify at the runtime in a loop. For the birthdate, I will pretend I was
+born January 1st, 1970.
+
+    params = {
+        'VIEWSTATE'         : '/wEPC5+FkhyN',
+        'EVENTVALIDATION'   : '/wEdAAJD5PYw==',
+        'identifier'        : '0',
+        'birthdate'         : '01/01/1970',
+        'radiobutton'       : 'RadioButton1',
+        'validate'          : 'Validate',
+        }
+
+Second, we can write the connection with the website. For that, we use the
+`http.client` module of Python. Also, the parameters of the POST http request
+must be escaped into the URL encoding.
+
+This part actually caused me quite some trouble, until using the debugger tool
+provided with Firefox, I discovered that in the header of the POST request, I
+had to explicitly specify that the parameters were URL encoded.
+
+    import http.client
+    import urllib
+    import re
+
+    # specify we're sending parameters that are url encoded
+    headers = { 'Content-Type' : 'application/x-www-form-urlencoded' }
+
+    # our parameters
+    params = { ... }
+
+    # establish connection with the webpage
+    h = http.client.HTTPConnection('shittywebsite.com')
+
+    # url encode the parameters
+    url_params = urllib.parse.urlencode(params)
+
+    # send out the POST request
+    h.request('POST', 'stelar/login.aspx', url_params, headers)
+
+    # get the response
+    r = h.getresponse()
+
+    # analyse the response
+    if re.search("Error", r.read.decode()):
+        print("Not found")
+    else:
+        print("Probably found")
+
+    h.close()
+
+If you need to iterate on different identifiers, just put everything (after the
+connection establishment) into a loop. Also, if you want to be nice, don't
+forget to put a sleep in between each request, so it does not look like you're
+put the webserver under attack.
+
+    h = ...
+
+    for i in range (76000, 80000):
+        params['identifier'] = str(i)
+
+        url_params = ...
+
+        h.request(...)
+
+        r = ...
+
+        if re.search(...):
+            ...
+        else:
+            print("Probably found")
+            break
+
+        time.sleep(0.3)
+
+    h.close()
+
+
+In my case, I was able to finally get my document by finding the proper
+identifier, which turned out to be the value they had given me minus one!
+79024 instead of 79025...
