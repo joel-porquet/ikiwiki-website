@@ -5,15 +5,14 @@
 
 Recently, I had to get a very important document on some website. The website
 was asking for an unique identifier and my birth date, which were supposed to
-give me access to this document. Unfortunately, I had been given me a wrong
-identifier and the website was keeping giving me an error message, preventing
-me from accessing this document.
+give me access to this document. Unfortunately, I had been given a wrong
+identifier and the website kept giving me an error message, preventing me from
+accessing this document.
 
-Anyway, I quickly realized that the identifier were actually given in a
-sequential manner. The first time I had been given a identifier, which was
-working, it was ending with the number 76656. And a few weeks later, the second
-time, when they gave me the erroneous identifier, it was ending with the number
-79025.
+Anyway, I quickly realized that the identifiers were actually given in a
+sequential manner. The first time I had been given an correct identifier, it
+ended with the number 76656. And a few weeks later, the second time then, when
+they gave me the erroneous identifier, it ended with the number 79025.
 
 I thus decided I would write a quick script, using Python to be cool, and try
 all the number between the one that had worked a few weeks before, and slightly
