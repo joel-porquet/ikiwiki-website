@@ -51,10 +51,10 @@ An example is as follow:
     [common1]
         extra = 1211
 
-        [[amazon.com]]
+        \[[amazon.com]]
             id = myemail
 
-        [[shittywebsite.com]]
+        \[[shittywebsite.com]]
             id = myemail
             length = 9
             preq = lower:1, upper:1, digit:1, punct:1:8
