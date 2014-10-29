@@ -7,25 +7,35 @@ it on [[password_management_history]].
 
 `jpass` is to be used in a terminal. Without any arguments, it will read the
 default configuration file, located in `~/.jpass.conf`. Otherwise you can
-specify the path of the configuration file as argument: `jpass
+specify the path of the configuration file as argument: `jpass -c
 [configuration_file]`
+
+    $ jpass -h
+    usage: jpass [-h] [-v] [-c CONF] [-s SERVICE] [-i]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --verbosity       increase verbosity level
+      -c CONF, --conf CONF  specify a configuration file (default is
+                            '~/.jpass.conf')
+      -s SERVICE, --service SERVICE
+                            specify a service name
+      -i, --information     only display information about a service
 
 # Configuration file
 
 The configuration follows the syntax of the
-[ConfigParser](https://docs.python.org/dev/library/configparser.html) module
-that is part of Python.
+[ConfigObj](http://configobj.readthedocs.org/en/latest/) module .
 
 In the configuration file, you define named services, and parameters for each service.
 An example is as follow:
 
-    [DEFAULT]
-        method = sha256:base64
-        length = 8
-        pauth = alnum
+    method = sha256:base64
+    length = 8
+    pauth = alnum
 
     [google.com]
-        iden = yourname
+        id = yourname
         extra = 1211
 
     [startssl]
@@ -41,19 +51,18 @@ An example is as follow:
     [common1]
         extra = 1211
 
-    [amazon.com]
-        parent = common1
-        iden = myemail
+        [[amazon.com]]
+            id = myemail
 
-    [shittywebsite.com]
-        parent = common1
-        iden = myemail
-        length = 9
-        preq = lower:1, upper:1, digit:1, punct:1:8
+        [[shittywebsite.com]]
+            id = myemail
+            length = 9
+            preq = lower:1, upper:1, digit:1, punct:1:8
 
-The `DEFAULT` section should define default parameters that all other sections
-will inherit from, although those parameters can be overridden. At least
-`method`, `length` and `pauth` should be defined for every services.
+At the root of the configuration file, there should be the definition of
+default parameters that all other sections will inherit from, although those
+parameters can be overridden in each section. At least `method`, `length` and
+`pauth` should be defined for every services.
 
 Here is the list of possible parameters with explanations:
 
@@ -69,12 +78,14 @@ Here is the list of possible parameters with explanations:
 * **preq**: list of required characters in the password. You can specify the
   number of characters of a certain class. You can also specify what should be
   the position of the characters in the password. The format is:
-  `[lower|upper|digit|punct]:number[:position1:position2:...], ...`
-* **iden**: identifier for that service
-* **parent**: indicates another section from which the current section inherits
-  from (all sections inherit from `DEFAULT` first).
+  `lower|upper|digit|punct:number[:position1:position2:...], ...`
+* **id**: identifier for that service
 * **extra**: extra token to add to the section name to generate the passphrase.
 * **comment**: optional user string
+
+A section can inherit from another one, by specifying more square brackets. For
+example, in the example above, sections `amazon.com` and `shittywebsite.com`
+both inherit from section `common1`.
 
 # Code
 
@@ -84,4 +95,4 @@ You can find the source code of `jpass` on my
 # Archlinux package
 
 I packaged `jpass` for ArchLinux. Find the webpage on
-[AUR](https://aur.archlinux.org/packages/jpass).
+[AUR](https://aur.archlinux.org/packages/jpass-git).
