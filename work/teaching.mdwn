@@ -12,6 +12,10 @@ and Marie Curie ([UPMC](http://www.upmc.fr/en)) if not specified otherwise.
 At EPITA (Graduate School of Computer Science), a course part of the main
 engineering program's common core:
 
+*   #### L3: Software and hardware architecture of computers
+    Tutorial and lab sessions, 44h<br />
+    *Same as Fall 2010*
+
 *   #### Computer architecture and assembly language
     Lecture and lab sessions, 28h<br />
     (en) [slides](http://asm.ssji.net)
