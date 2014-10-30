@@ -17,6 +17,7 @@ engineering program's common core:
     Tutorial and lab sessions, 28h<br />
     (en) [slides](http://asm.ssji.net)
 
+
 # Fall 2013
 
 *   #### L3: Software and hardware architecture of computers
