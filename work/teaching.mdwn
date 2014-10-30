@@ -1,11 +1,20 @@
 [[!meta title="Teaching activities"]]
 
-A chronologically ordered list of my teachings, at University of Pierre and
-Marie Curie ([UPMC](http://www.upmc.fr/en)).
+A chronologically ordered list of my teachings, mainly at University of Pierre
+and Marie Curie ([UPMC](http://www.upmc.fr/en)) if not specified otherwise.
 
 * **L2/L3** means second/third year of *Licence*. *Licence* is the French
   version of the Bachelor's degree, although *Licence* lasts only 3 years.
 * **M1/M2** means first/second year of a French *Master's program*.
+
+# Fall 2014
+
+At EPITA (Graduate School of Computer Science), a course part of the main
+engineering program's common core:
+
+*   #### Computer architecture and assembly language
+    Lecture and lab sessions, 28h<br />
+    (en) [slides](http://asm.ssji.net)
 
 # Fall 2013
 

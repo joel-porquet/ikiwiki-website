@@ -5,7 +5,8 @@
 *   #### 2013 - present: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
     **Postdoctoral research assistant**<br />
     *[[Porting Linux on the TSAR processor architecture|linux_tsar_porting]]*<br />
-    *64h of [[teaching]] during fall 2013*<br />
+    *28 hours of [[teaching]] during fall 2014*<br />
+    *64 hours of [[teaching]] during fall 2013*<br />
     Advised by [Prof. Alain Greiner](http://www-soc.lip6.fr/~alain/)
 
 
@@ -18,8 +19,8 @@
 
 *   #### 2010 - 2011: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
     **Research and teaching assistant**<br />
-    *Finished writing my [[Ph.D. thesis|phd]] and did ~200 hours of
-    [[teaching]]*
+    *Completed my [[Ph.D. thesis|phd]]*<br />
+    *~200 hours of [[teaching]]*
 
 
 *   #### 2007 - 2010: STMicroelectronics, Rousset, France
