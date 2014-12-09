@@ -1,6 +1,6 @@
 [[!meta title="Resume"]]
 
-# Professional/research experiences
+# Professional/research experience
 
 *   #### 2013 - present: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
     **Postdoctoral research assistant**<br />
@@ -64,7 +64,7 @@
 
 [[Dedicated page|publications]]
 
-# Teaching
+# Teaching experience
 
 [[Dedicated page|teaching]]
 
