@@ -1,4 +1,4 @@
-[[!meta title="Porting Linux on the TSAR architecture"]]
+[[!meta title="Porting Linux to the TSAR architecture"]]
 
 # TSAR
 

@@ -2,9 +2,9 @@
 
 # Professional/research experiences
 
-*   #### 2013 - present: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
+*   #### 2013 - present: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
     **Postdoctoral research assistant**<br />
-    *[[Porting Linux on the TSAR processor architecture|linux_tsar_porting]]*<br />
+    *[[Porting Linux to the TSAR processor architecture|linux_tsar_porting]]*<br />
     *28 hours of [[teaching]] during fall 2014*<br />
     *64 hours of [[teaching]] during fall 2013*<br />
     Advised by [Prof. Alain Greiner](http://www-soc.lip6.fr/~alain/)
@@ -12,8 +12,7 @@
 
 *   #### 2011 - 2012: Columbia University ([CU](http://www.columbia.edu/)), New York City, USA
     **Postdoctoral research assistant**<br />
-    *[[Dynamic Information Flow Tracking in Heterogeneous
-    Processors|postdoc_columbia]]*<br />
+    *[[Dynamic Information Flow Tracking in Heterogeneous Processors|postdoc_columbia]]*<br />
     Advised by [Prof. Simha Sethumadhavan](http://www.cs.columbia.edu/~simha)
 
 
@@ -53,18 +52,21 @@
 *   #### 2007 - 2010: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
     **Ph.D.** in Computer Science, sponsored by
     [STMicroelectronics](http://www.st.com)<br />
-    *[[Dynamic security architecture for multiprocessor
-    systems-on-chip|phd]]*
+    *[[Dynamic security architecture for multiprocessor systems-on-chip|phd]]*
 
 
 *   #### 2002 - 2005: University of Pierre and Marie Curie ([UPMC](http://www.upmc.fr/en)), Paris, France
-    **Master and Bachelor degrees** in Computer Science<br />
+    **Master's and Bachelor's degrees** in Computer Science<br />
     Specialization in *Architecture and Design of Integrated Systems*<br />
     *First class honours ("mention très bien")*
 
 # Publications
 
 [[Dedicated page|publications]]
+
+# Teaching
+
+[[Dedicated page|teaching]]
 
 # Other
 

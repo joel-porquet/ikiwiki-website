@@ -1,16 +1,12 @@
 [[!meta title="Teaching activities"]]
 
-A chronologically ordered list of my teachings, mainly at University of Pierre
-and Marie Curie ([UPMC](http://www.upmc.fr/en)) if not specified otherwise.
-
-* **L2/L3** means second/third year of *Licence*. *Licence* is the French
-  version of the Bachelor's degree, although *Licence* lasts only 3 years.
-* **M1/M2** means first/second year of a French *Master's program*.
+A chronologically ordered list of my teachings, mainly at Pierre and Marie
+Curie University ([UPMC](http://www.upmc.fr/en)) if not specified otherwise.
 
 # Fall 2014
 
-At EPITA (Graduate School of Computer Science), a course part of the main
-engineering program's common core:
+At [EPITA](http://www.epita.fr/international/) (Graduate School of Computer
+Science), a course part of the main engineering program's common core:
 
 *   #### Computer architecture and assembly language
     Tutorial and lab sessions, 28h<br />
@@ -20,11 +16,13 @@ engineering program's common core:
 
 # Fall 2013
 
-*   #### L3: Software and hardware architecture of computers
+*   #### Software and hardware architecture of computers
+    Undergraduate level (L3)<br />
     Tutorial and lab sessions, 44h<br />
     *Same as Fall 2010*
 
-*   #### M1: SystemC
+*   #### SystemC
+    Graduate level (M1)<br />
     Lecture and lab sessions, 20h<br />
     *Re-wrote most of the lecture material*<br />
     *Re-coded most of the lab assignements*<br />
@@ -32,23 +30,26 @@ engineering program's common core:
 
 # Spring 2010
 
-*   #### M1: supervision of two student projects
-    - "Implementation of the writing support for the FAT filesystem in
+*   #### Supervision of two student graduate-level projects
+    - "Write support implementation for the FAT filesystem in
       [MutekH](http://www.mutekh.org)", by [Mohamed
       Karaoui](http://www.lip6.fr/actualite/personnes-fiche.php?ident=D1361&LANG=en)
     - "Implementation of the ext2 filesystem in
       [MutekH](http://www.mutekh.org)", by [Alexandre
       Brière](http://www.lip6.fr/actualite/personnes-fiche.php?ident=D1369&LANG=en)
 
-*   #### L2: Data types and structures
+*   #### Data types and structures
+    Undergraduate level (L2)<br />
     Tutorial and lab sessions, 43h
 
-*   #### L2: Computer and representation
+*   #### Computer and representation
+    Undergraduate level (L2)<br />
     Tutorial and lab sessions, 42h
 
 # Fall 2010
 
-*   #### L3: Software and hardware architecture of computers
+*   #### Software and hardware architecture of computers
+    Undergraduate level (L3)<br />
     Tutorial and lab sessions, 48h<br />
     *Re-coded from scratch the small Operating System that is studied and used
     by the students*<br />
@@ -56,10 +57,12 @@ engineering program's common core:
     instance*<br />
     (fr) [link](https://www-soc.lip6.fr/trac/sesi-almo/)
 
-*   #### M1: Processors architecture and code optimization
+*   #### Processors architecture and code optimization
+    Graduate level (M1)<br />
     Tutorial sessions, 40h
 
-*   #### M2: Software application mapping on MPSoC
+*   #### Software application mapping on MPSoC
+    Graduate level (M2)<br />
     Lecture and lab sessions, 27h<br />
     *Re-formatted all the lecture material and lab assignments, and put them in
     a Trac instance*<br />
