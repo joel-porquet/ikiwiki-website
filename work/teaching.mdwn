@@ -8,6 +8,7 @@ Science), a course part of the main engineering program's common core:
 *   **Computer architecture and assembly language**
     Tutorial and lab sessions, 28h<br />
     (en) [slides](http://asm.ssji.net)
+    (en) [homework](http://asm.ssji.net/caal_2014_student.tar.bz2)
 
 ---
 
