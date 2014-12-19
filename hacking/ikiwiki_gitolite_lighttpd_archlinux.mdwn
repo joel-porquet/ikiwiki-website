@@ -20,15 +20,13 @@ the `http` user that serves the web pages (through lighttpd) and the `git` user
 that manages gitolite repositories.
 
     $ sudo groupadd --system ikiwiki
-    $ sudo useradd --system -c 'ikiwiki user' -g ikiwiki -G git -m -d /srv/ikiwiki ikiwiki
+    $ sudo useradd --system -c 'ikiwiki user' -g ikiwiki -m -d /srv/ikiwiki ikiwiki
 
 The first command creates a system group called `ikiwiki`. The second command
 creates a user named `ikiwiki` with the following properties:
 
 * it is a system user,
 * its primary group is `ikiwiki` (`-g` option),
-* its secondary group is `git` (`-G` option), so that it can later access the
-  corresponding git repository managed by gitolite,
 * and finally it has a home directory located in `/srv/ikiwiki` (with
   archlinux, services such as gitolite, lighttpd, etc. have their so-called
   home directory in `/srv/`).
@@ -95,36 +93,6 @@ gitolite admin repository, define the new repository for the wiki:
 
 Copy ikiwiki's public key in `keydir/ikiwiki.pub`. It is likely that the
 permissions of the key need to be corrected.
-
-Before committing and pushing in gitolite, so gitolite creates the requested
-repository for the wiki, gitolite must be configured to give ikwiki access to
-the repository. Basically, the repository should be accessible by users
-belonging to the `git` group, which is the case of the `ikiwiki` user as
-created above. Two solutions, respectively a global and a local one:
-
-* Either set `$UMASK` in `.gitolite.rc` to `027`. It means that from now on all
-  the git repositories that gitolite will create will be accessible by users
-  belonging to the `git` group.
-* Or, in `conf/gitolite.conf`, set the wiki repository to be accessible by the
-  `git` group:
-
-        repo    wiki
-            RW+ = ikiwiki
-            config core.sharedRepository = true
-
-  Make sure to set `$GIT_CONFIG_KEYS` in `.gitolite.rc` to an appropriate value
-  (e.g. `'.*'` which is the most permissive), so the `config
-  core.sharedRepository` key gets properly evaluated.
-
-More details on gitolite's configuration
-[here](http://gitolite.com/gitolite/rc.html).
-
-Now, commit and push the gitolite configuration to create the git bare
-repository for the wiki. Make sure it was created properly, that is with the
-right permissions:
-
-    $ sudo ls -ld /srv/git/repositories/wiki.git/
-    drwxr-x--- 7 git git 4096 Jan 10 13:56 /srv/git/repositories/wiki.git/
 
 # Connect ikiwiki and the bare git repository
 
