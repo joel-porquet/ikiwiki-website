@@ -62,7 +62,7 @@ and Marie Curie University ([UPMC](http://www.upmc.fr/en)).
     by the students*<br />
     *Re-formatted all the tutorial and lab assignements, and put them in a Trac
     instance*<br />
-    (fr) [link](https://www-soc.lip6.fr/trac/sesi-almo/)
+    (fr) [trac](https://www-soc.lip6.fr/trac/sesi-almo/)
 
 *   **Processors architecture and code optimization**
 
@@ -75,4 +75,4 @@ and Marie Curie University ([UPMC](http://www.upmc.fr/en)).
     Lecture and lab sessions, 27h<br />
     *Re-formatted all the lecture material and lab assignments, and put them in
     a Trac instance*<br />
-    (fr) [link](https://www-soc.lip6.fr/trac/sesi-mjpeg)
+    (fr) [trac](https://www-soc.lip6.fr/trac/sesi-mjpeg)
