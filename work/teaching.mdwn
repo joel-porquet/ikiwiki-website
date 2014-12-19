@@ -6,6 +6,7 @@ At [EPITA](http://www.epita.fr/international/) (Graduate School of Computer
 Science), a course part of the main engineering program's common core:
 
 *   **Computer architecture and assembly language**
+
     Tutorial and lab sessions, 28h<br />
     (en) [slides](http://asm.ssji.net)
     (en) [homework](http://asm.ssji.net/caal_2014_student.tar.bz2)
@@ -18,11 +19,13 @@ and Marie Curie University ([UPMC](http://www.upmc.fr/en)).
 # Fall 2013
 
 *   **Software and hardware architecture of computers**
+
     Undergraduate level (L3)<br />
     Tutorial and lab sessions, 44h<br />
     *Same as Fall 2010*
 
 *   **SystemC**
+
     Graduate level (M1)<br />
     Lecture and lab sessions, 20h<br />
     *Re-wrote most of the lecture material*<br />
@@ -40,16 +43,19 @@ and Marie Curie University ([UPMC](http://www.upmc.fr/en)).
       Brière](http://www.lip6.fr/actualite/personnes-fiche.php?ident=D1369&LANG=en)
 
 *   **Data types and structures**
+
     Undergraduate level (L2)<br />
     Tutorial and lab sessions, 43h
 
 *   **Computer and representation**
+
     Undergraduate level (L2)<br />
     Tutorial and lab sessions, 42h
 
 # Fall 2010
 
 *   **Software and hardware architecture of computers**
+
     Undergraduate level (L3)<br />
     Tutorial and lab sessions, 48h<br />
     *Re-coded from scratch the small Operating System that is studied and used
@@ -59,10 +65,12 @@ and Marie Curie University ([UPMC](http://www.upmc.fr/en)).
     (fr) [link](https://www-soc.lip6.fr/trac/sesi-almo/)
 
 *   **Processors architecture and code optimization**
+
     Graduate level (M1)<br />
     Tutorial sessions, 40h
 
 *   **Software application mapping on MPSoC**
+
     Graduate level (M2)<br />
     Lecture and lab sessions, 27h<br />
     *Re-formatted all the lecture material and lab assignments, and put them in
