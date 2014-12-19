@@ -77,3 +77,13 @@ In the last couple of years, I really have got into
 New York, following two classes at the People's Improv Theater
 ([PIT](http://thepit-nyc.com/)). And I'm now a member of the Parisian
 Improvisation League ([LIP](http://www.improparis.com/)).
+
+Being quite a computer hobbyist, I also continue learning and programming on my
+spare time:
+* I was the 32nd person to complete the [Eudyptula Challenge](http://eudyptula-challenge.org/)
+  (a series of programming exercises for the Linux kernel - as of December
+  2014, 8900 people signed up).
+* Between October and December 2014, I followed an
+  [online course](https://www.france-universite-numerique-mooc.fr/courses/inria/41001/Trimestre_4_2014/about)
+  about Python.
+* I also develop a few [[personal projects|hacking/projects]].
