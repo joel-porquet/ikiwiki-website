@@ -1,0 +1,157 @@
+[[!meta title="How to make bottle.py play well with lighttpd"]]
+[[!tag bottlepy flup lighttpd archlinux]]
+
+# On bottle.py's side
+
+[Bottle](http://bottlepy.org) is a really great and simple micro web-framework
+for Python. Recently, I've been able to put up a web front-end for my [[jpass]]
+application within days.
+
+By default, bottlepy supports WSGI server, which is fine if you use Apache.
+Unfortunately, lighttpd does not support WSGI.
+
+So in case you don't want to use the basic CGI (which bottlepy supports too),
+then you have to wrap your bottle application inside a WSGI server: for
+example, [flup](http://www.saddi.com/software/flup/) which is then compatible
+with lighttpd's fastCGI interface.
+
+## Bottlepy typical application
+
+Let's assume a simple application with static files and an index:
+
+    import bottle
+
+    ## url formatting in templates
+    bottle.SimpleTemplate.defaults["get_url"] = bottle.url
+
+    @bottle.route("/static/<filepath:path>", name="static")
+    def server_static(filepath):
+        return bottle.static_file(filepath, root="static")
+
+    @bottle.route("/")
+    @bottle.route("/<user>")
+    def index(user=None):
+        return bottle.template("index", user=user)
+
+Inside the *index* template, using the `get_url()` trick (see
+[here](http://stackoverflow.com/a/9525572) for more):
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        ...
+        <script type="text/javascript" src="{{get_url("static", filepath="js/app.js")}}"></script>
+        <link rel="stylesheet" href="{{get_url("static", filepath="css/style.css")}}">
+        ...
+    </head>
+    ...
+    </html>
+
+For this example, the file hierarchy would be:
+
+    $ tree
+    .
+    ├── webapp.py
+    ├── static
+    │   ├── css
+    │   │   └── style.css
+    │   └── js
+    │       ├── app.js
+    └── views
+        └── index.tpl
+
+## Connecting flup
+
+With bottlepy's built-in webserver, everything should work perfectly fine. Now
+if you want to wrap your bottlepy web application inside flup in order to make
+compatible with lighttpd's fastCGI interface, you have to add a few lines.
+
+For that, let's edit a new file `webapp_fcgi.py` and write:
+
+    #!/usr/bin/env python
+
+    import webapp
+    import os
+
+    if __name__ == "__main__":
+        # Change working directory so relative paths (and template lookup) work again
+        os.chdir(os.path.dirname(__file__))
+        # start flup webserver
+        webapp.bottle.run(server="flup")
+
+Make this file executable, it will be easier later.
+
+# On lighttpd's side
+
+Now it is time to make that work with lighttpd. Let's assume your web
+application is, following the Archlinux's guidelines, installed in
+`/usr/share/webapps/`.
+
+Now here is what the configuration could be like for lighttpd:
+
+    var.webapp_url = "/webapp"
+    var.webapp_path = "/usr/share/webapps/webapp"
+    var.webapp_fcgi = "webapp_fcgi.py"
+
+    # webapp rule
+    $HTTP["url"] =~ "^" + webapp_url + "(|/.*)" {
+        # use this path instead of the normal document-root
+        alias.url += (webapp_url => webapp_path)
+        # new index file
+        index-file.names = (webapp_fcgi)
+        # rewriting rule
+        url.rewrite-once = (
+            # do not rewrite an already well formatted url
+            "^" + webapp_url + "/" + webapp_fcgi + "(|/.*)$" => "$0",
+            # rewrite only if looking like /webapp/<toto> (to /webapp/webapp_fcgi.py/toto)
+            "^" + webapp_url + "(/.*)$" => webapp_url + "/" + webapp_fcgi + "$1",
+            )
+        # special configuration for python
+        fastcgi.server = (
+            ".py" => (
+                "webapp" => (
+                    "bin-path" => webapp_path + "/webapp_fcgi.py",
+                    "socket" => state_dir + "/python-fastcgi-webapp.socket",
+                    "max-procs" => 1,
+                    "check-local" => "disable",
+                    )
+                )
+            )
+        }
+
+There are two tricks here that are worth some explanations.
+
+## Handling all URLs
+
+If we want our bottlepy web application to handle **all** the requests
+(including static file requests) then all has to go through the fastCGI binary.
+
+It has an impact on URLs though, since it means that an access to
+`http://yourwebsite/webapp/toto` could not work: it should be
+`http://yourwebsite/webapp/webapp_fcgi.py/toto`.
+
+It is the same for static files, but fortunately that is transparently taken
+care of by bottlepy thanks to the `get_url()` trick.
+
+So basically, all we have to do here is to rewrite dynamic URLs in order to
+make them go through `webapp_fcgi.py` and that is what the second rewriting
+rule does.
+
+## Using a file socket instead of an IP:port
+
+By default, when interfacing with flup, bottlepy creates a network socket such
+as `localhost:8080`. I think it's not the best option, as lighttpd's fastCGI
+module works very well with file sockets.
+
+For that though, you have to patch bottlepy so it does not create the network
+socket:
+
+    --- /usr/bin/bottle.py  2014-08-02 13:43:19.000000000 +0200
+    +++ tmp/bottle.py       2014-12-23 23:42:50.872687454 +0100
+    @@ -2740,7 +2740,7 @@
+     class FlupFCGIServer(ServerAdapter):
+         def run(self, handler): # pragma: no cover
+             import flup.server.fcgi
+    -        self.options.setdefault('bindAddress', (self.host, self.port))
+    +        #self.options.setdefault('bindAddress', (self.host, self.port))
+             flup.server.fcgi.WSGIServer(handler, **self.options).run()
