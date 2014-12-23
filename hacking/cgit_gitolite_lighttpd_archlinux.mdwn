@@ -56,9 +56,13 @@ More on [this](https://wiki.archlinux.org/index.php/Cgit#Syntax_highlighting).
 
 Other options in `/etc/cgitrc` that can be interesting to define:
 
-    # set title and description
+    # Set title and description
     root-title=Your title
     root-desc=Your description
+
+    # Display README.md files (located with your repos) in HTML (like github)
+    readme=:README.md
+    about-filter=/usr/lib/cgit/filters/about-formatting.sh
 
     # Show extra links for each repository on the index page
     enable-index-links=1
