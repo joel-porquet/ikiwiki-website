@@ -66,11 +66,16 @@ With bottlepy's built-in webserver, everything should work perfectly fine. Now
 if you want to wrap your bottlepy web application inside flup in order to make
 compatible with lighttpd's fastCGI interface, you have to add a few lines.
 
+However, and that is the most important part, do not use the flup wrapper
+provided by bottlepy (`webapp.bottle.run(server="flup")`) but do the wrapping
+yourself.
+
 For that, let's edit a new file `webapp_fcgi.py` located in the root folder and
 write:
 
     #!/usr/bin/env python
 
+    import flup.server.fcgi
     import webapp
     import os
 
@@ -78,7 +83,7 @@ write:
         # Change working directory so relative paths (and template lookup) work again
         os.chdir(os.path.dirname(__file__))
         # start flup webserver
-        webapp.bottle.run(server="flup")
+        flup.server.fcgi.WSGIServer(webapp.bottle.default_app()).run()
 
 Make this file executable, it will later be easier for lighttpd's configuration.
 
@@ -123,7 +128,7 @@ Now here is what the configuration could be like for lighttpd:
 
 Note: in my configuration, `state_dir` is setup to be `/var/run/lighttpd`.
 
-There are two tricks here that are worth some explanations.
+There is one trick here that are is some explanations.
 
 ## Handling all URLs
 
@@ -145,20 +150,3 @@ We also have to disable the `check-local` fastCGI option, as shown above, so
 that lighttpd doesn't check local files corresponding to URLs exist before
 transmitting requests to the fastCGI application.
 
-## Using a file socket instead of an IP:port
-
-By default, when interfacing with flup, bottlepy creates a network socket such
-as `localhost:8080`. I think it's not the best option, as lighttpd's fastCGI
-module works very well with file sockets.
-
-For that, you have to patch bottlepy so it does not create the network socket:
-
-    --- /usr/bin/bottle.py  2014-08-02 13:43:19.000000000 +0200
-    +++ tmp/bottle.py       2014-12-23 23:42:50.872687454 +0100
-    @@ -2740,7 +2740,7 @@
-     class FlupFCGIServer(ServerAdapter):
-         def run(self, handler): # pragma: no cover
-             import flup.server.fcgi
-    -        self.options.setdefault('bindAddress', (self.host, self.port))
-    +        #self.options.setdefault('bindAddress', (self.host, self.port))
-             flup.server.fcgi.WSGIServer(handler, **self.options).run()
