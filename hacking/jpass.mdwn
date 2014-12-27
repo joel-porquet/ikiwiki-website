@@ -6,6 +6,9 @@
 For more information about why this software, you can read about the history of
 it on [[password_management_history]].
 
+![jpass demo](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/plain/docs/demo.gif)
+![jpass-web demo](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/plain/docs/demo.gif)
+
 # Documentation
 
 You can find the documentation on my cgit website:
