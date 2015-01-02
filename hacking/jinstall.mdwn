@@ -1,0 +1,24 @@
+[[!meta title="jinstall: automated file installer"]]
+
+**jinstall** is an automated text-based file installer.
+
+![jinstall demo](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/plain/docs/demo.gif)
+
+# Documentation
+
+You can find the documentation on my cgit website:
+
+* [jinstall](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/about/)
+
+# Source code
+
+You can find the entire source code on my cgit website:
+
+* [jinstall](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/)
+
+# Archlinux packages
+
+I packaged **jinstall** for ArchLinux.
+Please find the webpage on:
+
+* [jinstall](https://aur.archlinux.org/packages/jinstall-git)
