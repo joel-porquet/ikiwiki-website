@@ -1,4 +1,4 @@
-[[!meta title="jpass password manager"]]
+[[!meta title="jpass: password manager"]]
 
 **jpass** is a flexible and configurable password manager and generator. And
 **jpass-web** is a web-frontend for it.
@@ -20,13 +20,13 @@ You can find the documentation on my cgit website:
 
 You can find the entire source code on my cgit website:
 
-* [jpass](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/).
-* [jpass-web](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/).
+* [jpass](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/)
+* [jpass-web](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/)
 
 # Archlinux packages
 
 I packaged **jpass** and **jpass-web** for ArchLinux.
 Please find the webpage on:
 
-* [jpass](https://aur.archlinux.org/packages/jpass-git).
-* [jpass-web](https://aur.archlinux.org/packages/jpass-web-git).
+* [jpass](https://aur.archlinux.org/packages/jpass-git)
+* [jpass-web](https://aur.archlinux.org/packages/jpass-web-git)
