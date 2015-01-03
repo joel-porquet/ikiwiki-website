@@ -1,0 +1,4 @@
+[[!meta title="pages tagged zsh"]]
+
+[[!inline pages="tagged(zsh)" actions="no" archive="yes"
+feedshow=10]]
