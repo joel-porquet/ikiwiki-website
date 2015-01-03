@@ -1,0 +1,130 @@
+[[!meta title="How to make Konsole play well with vim mappings"]]
+[[!tag konsole vim]]
+
+# Introduction
+
+In regular graphical applications, (almost) all key combinations are recognized
+but it is unfortunately not always the case for console applications. The
+problem lies in *terminal emulation*.
+
+Basically, if I hit `Backspace` in Konsole, then Konsole will send to the
+console application the ASCII code `0x7F` which corresponds to `DEL`. And by
+default, no modifier (namely `Shift`, `Ctrl`, `Alt`, etc.) changes which code
+is sent when `Backspace` is pressed.
+
+However, it would be quite nice to have different behaviors for modified keys,
+such as `Enter` and `Backspace`, especially with vim but also with zsh.
+
+With vim, for example, I'd like to have the following mappings to work:
+
+    " jump to tag
+    nnoremap <C-CR> <C-]>
+    " jump to tag but split vertically first
+    nnoremap <S-CR> <C-w>v<C-]>
+    " jump back
+    nnoremap <C-BS> <C-T>
+
+As you have certainly understood from the snippet above, the mappings are for
+navigating into some source code with ctags or cscope, and using
+`Control-Enter` for jump to a tag definition, and `Control-Backspace` for
+jumping back.
+
+Those mappings work out of the box in gvim, because as a graphical application,
+gvim receives directly the right key combinations. But once again, vim will not
+receive those key combinations because Konsole will not send them: by default,
+Konsole sends the same codes for `Enter` and `Control-Enter`, and for
+`Backspace` and `Control-Backspace`.
+
+# Konsole
+
+The first thing to do is to modify the codes Konsole sends out for the key
+combinations we're interested in. For that, go to Setting and start editing
+your profile. Under the tab named Keyboard, you can modify the key bindings.
+
+By default, you should find the following bindings:
+
+    Backspace            : "\x7f"
+
+    Return+Shift         : "\EOM"
+    Return-Shift+NewLine : "\r\n"
+    Return-Shift-NewLine : "\r"
+
+And, it should be modified to have the following new bindings:
+
+    Backspace+AnyModifier       : "\E[9;*~"
+    Backspace-AnyModifier       : "\x7f"
+
+    Return+AnyModifier          : "\E[10;*~"
+    Return+NewLine-AnyModifier  : "\r\n"
+    Return-NewLine-AnyModifier  : "\r"
+
+For `Backspace`, it means that:
+
+ * Pressing `Backspace` without any modifier (i.e. `-AnyModifier`) will send
+   the same ASCII code as before.
+ * Pressing `Backspace` with a modifier (i.e. `+AnyModifier`) will send a
+   special *Escape Sequence*. The star is in the binding definition will be
+   replaced by the corresponding modifier: for example, pressing
+   `Shift+Backspace` will send `\E[9;2~`, and `Ctrl+Backspace` will send
+   `\E[9;5~`.
+
+And for `Return`, it is the same idea.
+
+For more information about *Escape Sequences*, you can read the [Xterm Escape
+Sequences](http://rtfm.etla.org/xterm/ctlseq.html) document.
+
+Especially, the list of possible modifiers is the following:
+
+| Code | Modifiers             |
+| ---- | --------------------- |
+| 2    | Shift                 |
+| 3    | Alt                   |
+| 4    | Shift + Alt           |
+| 5    | Control               |
+| 6    | Shift + Control       |
+| 7    | Alt + Control         |
+| 8    | Shift + Alt + Control |
+
+Note that the sequences `\E[9;*~` and `\E[10;*~` were kind of arbitrarily
+chosen, but it seems they are free sequences. Also in some [Ubuntu
+HowTo](https://help.ubuntu.com/community/HowToReadline), they use `\E[9;*~` so
+it looked like a good idea to do the same.
+
+# Vim
+
+Now that Konsole is able to send different codes for the different key
+combinations, it is time to configure vim in order to map use of them!
+
+For that, you just have to add as many vim mappings as necessary:
+
+    " Ctrl-Return
+    nmap <Esc>[10;5~ <C-CR>
+    " Shift-Return
+    nmap <Esc>[10;2~ <S-CR>
+    " Ctrl-Backspace
+    nmap <Esc>[9;5~ <C-BS>
+    " etc.
+
+Be careful that for those mappings, you do not want to use `noremap` because
+you actually want to be able to remap them.
+
+# Zsh
+
+For zsh, it is quite easy and straightforward as well. In my case, I want
+`Alt-Backspace` to delete words and `Ctrl-Backspace` to delete complete paths:
+
+    # default value for $WORDCHARS
+    export DEF_WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+    # take out the slash, period, angle brackets, dash and underscore here.
+    export WORDCHARS=${DEF_WORDCHARS//[\/.<>-_]}
+
+    # Alt-Backspace
+    bindkey "\e[9;3~" backward-delete-word
+
+    # Ctrl-Backspace
+    backward-delete-path() {
+        local WORDCHARS=${DEF_WORDCHARS}
+        zle backward-delete-word
+    }
+    zle -N backward-delete-path
+    bindkey "\e[9;5~" backward-delete-path
