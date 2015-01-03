@@ -1,7 +1,23 @@
-[[!meta title="Tips in LaTeX"]]
+[[!meta title="Conditional text boxes in LaTeX"]]
 [[!tag LaTeX]]
 
-## Automatic generation of exams and solutions
+# Introduction
+
+Conditional boxes of text can be very useful with LaTeX. I have been making use
+of them at least in two different ways in the past few years:
+
+* When writing scientific papers, it allows to write personal notes in draft
+  versions. Such notes can then conditionally be compiled in when giving the
+  draft to your supervisor for example, or compiled out totally so it does not
+  appear.
+
+* When writing exams, it enables the generation of two versions, one for the
+  teacher which includes the solutions and one for the students which includes
+  empty boxes.
+
+Here, we will focus on the latter which is more difficult.
+
+# Automatic generation of exams and solutions
 
 As a [[teacher|work/teaching]], it so happens that often I have to write exams.
 For that I use the powerful LaTeX, but even though there are already quite a
@@ -13,7 +29,7 @@ get two outputs automatically: the teacher's version with the solution, and the
 students' version without the solution but with empty boxes instead so they can
 fill in their answers directly on the document.
 
-### The environment that does it all
+## The environment that does it all
 
 First of all, for the new environment to work, you have to include one extra
 package, the `ifthen` package. This package makes it possible to distinguish
@@ -43,7 +59,7 @@ the students' version, the environment takes an argument, which is the vertical
 space that the empty box should take on the document (so that students can
 write down their answer).
 
-### Usage
+## Usage
 
 Here is an example of using this new environment (extracted from a real test):
 
@@ -59,7 +75,7 @@ In the teacher's version, we will see the solution in a box that fits the
 answer. But in the students' version, they just have an empty box of 5cm in
 height to propose their answer.
 
-### Makefile
+## Makefile
 
 Now we have to write a Makefile that will automatically generate both the
 teacher's and the students' versions.
@@ -79,7 +95,7 @@ would work:
 
 Enjoy!
 
-### Further explanations
+# Under the hood
 
 Let us look further at the definition of this new environment. As explained on
 the [LaTeX
@@ -94,7 +110,7 @@ wikibook](http://en.wikibooks.org/wiki/LaTeX/Macros#New_Environments), a
 * `before` is what is processed when encountering a `\begin{name}`
 * `after` is what is processed when encountering a `\end{name}`
 
-#### Understanding the teacher's version
+## Understanding the teacher's version
 
 When in teacher's version, meaning `\teacher` is defined (see Makefile above to
 understand how), the environment macro will be expanded as follows (notice that
@@ -133,7 +149,7 @@ follows:
     }
     \medskip
 
-#### Understanding the students' version
+## Understanding the students' version
 
 When in students' version, meaning `\teacher` is not defined, the environment
 macro will be expanded as follow:
