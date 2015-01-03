@@ -1,5 +1,5 @@
-[[!meta title="How to make Konsole play well with vim mappings"]]
-[[!tag konsole vim]]
+[[!meta title="How to make Konsole play well with vim/zsh mappings"]]
+[[!tag konsole vim zsh]]
 
 # Introduction
 
