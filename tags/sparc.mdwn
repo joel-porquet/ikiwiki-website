@@ -1,0 +1,4 @@
+[[!meta title="pages tagged sparc"]]
+
+[[!inline pages="tagged(sparc)" actions="no" archive="yes"
+feedshow=10]]
