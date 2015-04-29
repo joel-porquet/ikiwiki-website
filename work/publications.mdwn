@@ -42,6 +42,13 @@
 
 # Misc
 
+*   Joël Porquet, Alain Greiner and César Fuguet Tortolero<br />
+    **Porting the Linux kernel to the TSAR manycore architecture**<br />
+    *Conference on Design, Automation and Test in Europe*, 2015 (DATE'2015)<br />
+    (University Booth)<br />
+    [one-page description](http://www.date-conference.com/files/file/date15/ubooth/7810.pdf)
+    [poster](https://publications.lip6.fr/index.php/attachments/single/114)
+
 *   Joël Porquet, Alain Greiner and Christian Schwarz<br />
     **NoC-MPU: a secure architecture for flexible co-hosting on shared memory MPSoCs**<br />
     In the Tech Design Forum Journal, 2011<br />
