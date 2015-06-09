@@ -42,6 +42,9 @@
 
 # Misc
 
+*   **Reviewer** for the *2012 IEEE International Symposium on Performance
+    Analysis of Systems and Software* (ISPASS'2012)
+
 *   Joël Porquet, Alain Greiner and César Fuguet Tortolero<br />
     **Porting the Linux kernel to the TSAR manycore architecture**<br />
     *Conference on Design, Automation and Test in Europe*, 2015 (DATE'2015)<br />
