@@ -5,8 +5,8 @@ Sorbonne University ([Pierre and Marie Curie University](http://www.upmc.fr/en))
 within the [LIP6](http://www.lip6.fr/?LANG=en), a computer science research
 laboratory.
 
-More about my [[current work|work/linux_tsar_porting]] and my [[full
-resume|work]] (also on [LinkedIn](https://www.linkedin.com/in/joelporquet)).
+More about my [[current work|work/postdoc_upmc]] and my [[full resume|work]]
+(also on [LinkedIn](https://www.linkedin.com/in/joelporquet)).
 
 If you really want to, you can contact me at `joel.porquet@gmail.com` or
 `joel.porquet@lip6.fr` or `joel@porquet.org`.

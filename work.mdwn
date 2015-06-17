@@ -4,7 +4,7 @@
 
 *   #### 2013 - present: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
     **Postdoctoral research assistant**<br />
-    *[[Porting Linux to the TSAR processor architecture|linux_tsar_porting]]*<br />
+    *[[Porting Linux to the TSAR processor architecture|postdoc_upmc]]*<br />
     *28 hours of [[teaching]] during fall 2014*<br />
     *64 hours of [[teaching]] during fall 2013*<br />
     Advised by [Prof. Alain Greiner](http://www-soc.lip6.fr/~alain/)
