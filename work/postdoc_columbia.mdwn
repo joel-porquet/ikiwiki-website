@@ -17,9 +17,9 @@ processor caches, hardware security wrappers, hardware accelerators), using the
 libraries (e.g. a security module in the [MutekH](http://www.mutekh.org/)
 exo-kernel), ported multi-thread multimedia applications, etc.
 
-The results of this work were published in an international conference
-(International Conference on Hardware/Software Codesign and System Synthesis,
-2013).
+The results of this work were [[published|publications]] in an international
+conference (International Conference on Hardware/Software Codesign and System
+Synthesis, 2013).
 
 # Paper abstract
 
