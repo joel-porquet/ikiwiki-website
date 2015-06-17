@@ -33,8 +33,8 @@ mandatory.
 At the end of my work, the port of Linux was able to support:
 
 - uniprocessor and multiprocessor systems,
-- **NUMA** systems (booting on a 96-core prototype), with support for topology and
-  complex high memory arrangements,
+- **NUMA** systems (booting on a 96-core prototype), with support for complex
+  cpus topologies and complex memory arrangements (high memory),
 - early_printk,
 - KGDB,
 - device tree descriptions,
