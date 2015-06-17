@@ -1,0 +1,56 @@
+[[!meta title="Postdoc at Sorbonne University"]]
+
+# Porting Linux to the TSAR processor architecture
+
+During this postdoc at Sorbonne University, from May 2013 to February 2015, I
+ported the Linux kernel to a new processor architecture named TSAR.
+
+A page description and a poster were [[published|publications]] in 2015 at the
+_conference on Design, Automation and Test in Europe_ (DATE'2015).
+
+## The TSAR processor architecture
+
+[TSAR](https://www-soc.lip6.fr/trac/tsar), which stands for Tera-Scale
+ARchitecture, is an European MEDEA project, led by BULL. This project aims at
+defining a scalable, coherent shared-memory, multi-core architecture.
+
+TSAR is a clusterized architecture, organized in a 2D mesh topology. Each
+cluster (or node) contains up to 4 processors, a couple peripheral devices, a
+local interconnect and one physical memory bank. Clusters are interconnected
+with each other using a global interconnect, which is a distributed
+network-on-chip.
+
+There is also an I/O cluster, slightly outside of the regular mesh, which
+contains system peripheral devices.
+
+## Porting Linux
+
+Using MIPS32-compatible processor cores, it was unfortunately not necessary to
+port GCC to TSAR. Having a drastically different memory management system
+than those used for MIPS processors, porting Linux from scratch was however
+mandatory.
+
+At the end of my work, the port of Linux was able to support:
+
+- uniprocessor and multiprocessor systems,
+- **NUMA** systems (booting on a 96-core prototype), with support for topology and
+  complex high memory arrangements,
+- early_printk,
+- KGDB,
+- device tree descriptions,
+- multiple drivers: a block device with integrated DMA, a terminal, a simple
+  timer, a simple interrupt controller unit, and a complex generic interrupt
+  controller (with integrated timer and software interrupts),
+- etc.
+
+## Porting other tools
+
+Porting the Linux kernel is usually not sufficient if one wants to run
+full-featured applications. That is why, along with the Linux kernel were ported
+to the TSAR architecture:
+
+- [uCLibc](|http://www.uclibc.org/), a libc dedicated to embedded systems, with
+  support for NPTL,
+- [Buildroot](http://buildroot.uclibc.org/), a rootfs images generator,
+- [crosstool-ng](http://crosstool-ng.org/), etc.
+
