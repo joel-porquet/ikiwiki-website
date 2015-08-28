@@ -11,7 +11,8 @@ _conference on Design, Automation and Test in Europe_ (DATE'2015).
 ## The TSAR processor architecture
 
 [TSAR](https://www-soc.lip6.fr/trac/tsar), which stands for Tera-Scale
-ARchitecture, is an European MEDEA project, led by BULL. This project aims at
+ARchitecture, is an European MEDEA project, led by [BULL](http://www.bull.com/)
+and involving the [CEA-LETI](http://www-leti.cea.fr/en). This project aims at
 defining a scalable, coherent shared-memory, multi-core architecture.
 
 TSAR is a clusterized architecture, organized in a 2D mesh topology. Each
@@ -25,8 +26,8 @@ contains system peripheral devices.
 
 ## Porting Linux
 
-Using MIPS32-compatible processor cores, it was unfortunately not necessary to
-port GCC to TSAR. Having a drastically different memory management system
+Since TSAR uses MIPS32-compatible processor cores, it was fortunately not
+necessary to port GCC. Having a drastically different memory management system
 than those used for MIPS processors, porting Linux from scratch was however
 mandatory.
 
@@ -34,7 +35,7 @@ At the end of my work, the port of Linux was able to support:
 
 - uniprocessor and multiprocessor systems,
 - **NUMA** systems (booting on a 96-core prototype), with support for complex
-  cpus topologies and complex memory arrangements (high memory),
+  cpus topologies and complex memory arrangements,
 - early_printk,
 - KGDB,
 - device tree descriptions,
