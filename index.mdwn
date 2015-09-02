@@ -1,12 +1,14 @@
 [[!meta title="Joël Porquet"]]
 
-Since May 2013, I've been working as a **Postdoctoral research assistant** at
-Sorbonne University ([Pierre and Marie Curie University](http://www.upmc.fr/en))
-within the [LIP6](http://www.lip6.fr/?LANG=en), a computer science research
-laboratory.
+*I'm currently available for job opportunities, please contact me*
 
-More about my [[current work|work/postdoc_upmc]] and my [[full resume|work]]
-(also on [LinkedIn](https://www.linkedin.com/in/joelporquet)).
+From 2013 to 2015, I worked as a **Postdoctoral research assistant** at Sorbonne
+University ([Pierre and Marie Curie University](http://www.upmc.fr/en)) within
+the [LIP6](http://www.lip6.fr/?LANG=en), a computer science research laboratory.
+I [[ported Linux|work/postdoc_upmc]] to a new processor architecture.
+
+More about my [[resume|work]] (also on
+[LinkedIn](https://www.linkedin.com/in/joelporquet)).
 
 You can contact me at `joel.porquet@gmail.com` or `joel@porquet.org`.
 

@@ -2,7 +2,14 @@
 
 # Professional/research experience
 
-*   #### 2013 - present: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
+*   #### 2015 - present:
+    **World traveler and free-lancer**<br />
+    Took Spanish classes in South-America<br />
+    Wrote a series of articles for LWN.net:
+    * https://lwn.net/Articles/654783/
+
+
+*   #### 2013 - 2015: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
     **Postdoctoral research assistant**<br />
     *[[Porting Linux to the TSAR processor architecture|postdoc_upmc]]*<br />
     *28 hours of [[teaching]] during fall 2014*<br />
