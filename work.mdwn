@@ -6,7 +6,9 @@
     **World traveler and free-lancer**<br />
     Took Spanish classes in South-America<br />
     Wrote a series of articles for LWN.net:
-    * https://lwn.net/Articles/654783/
+    * [Porting Linux to a new processor architecture, part 1: The basics](https://lwn.net/Articles/654783/)
+    * Porting Linux to a new processor architecture, part 2: The early code (TBP)
+    * Porting Linux to a new processor architecture, part 3 (TBP)
 
 
 *   #### 2013 - 2015: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
