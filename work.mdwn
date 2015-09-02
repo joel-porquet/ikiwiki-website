@@ -3,7 +3,7 @@
 # Professional/research experience
 
 *   #### 2015 - present:
-    **World traveler and free-lancer**<br />
+    **World traveler and freelancer**<br />
     Took Spanish classes in South-America<br />
     Wrote a series of articles for LWN.net:
     * [Porting Linux to a new processor architecture, part 1: The basics](https://lwn.net/Articles/654783/)
