@@ -2,18 +2,13 @@
 
 **jinstall** is an automated terminal-based file installer.
 
-# Documentation
+# Documentation and source code
 
-You can find the documentation on my cgit website or on GitHub:
+You can find the documentation and the entire source code on my cgit website or
+on GitHub:
 
 * [jinstall-cgit](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/about/)
 * [jinstall-github](https://github.com/joel-porquet/jinstall)
-
-# Source code
-
-You can find the entire source code on my cgit website:
-
-* [jinstall](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/)
 
 # Archlinux packages
 
