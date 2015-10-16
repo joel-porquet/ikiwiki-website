@@ -1,14 +1,13 @@
-[[!meta title="jinstall: automated file installer"]]
+[[!meta title="jinstall: terminal-based automated file installer"]]
 
-**jinstall** is an automated text-based file installer.
-
-![jinstall demo](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/plain/docs/demo.gif)
+**jinstall** is an automated terminal-based file installer.
 
 # Documentation
 
-You can find the documentation on my cgit website:
+You can find the documentation on my cgit website or on GitHub:
 
-* [jinstall](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/about/)
+* [jinstall-cgit](https://joel.porquet.org/cgit/cgit.cgi/jinstall.git/about/)
+* [jinstall-github](https://github.com/joel-porquet/jinstall)
 
 # Source code
 
