@@ -5,12 +5,15 @@
 *   #### 2015 - present:
     **World traveler and freelancer**<br />
     Took Spanish classes in South-America<br />
+    Committed a few patches in the [Linux kernel](http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=joel+porquet)<br />
     Wrote a series of articles for LWN.net:
     * [Porting Linux to a new processor architecture, part 1: The basics](https://lwn.net/Articles/654783/)
     * [Porting Linux to a new processor architecture, part 2: The early code](https://lwn.net/Articles/656286/)
     * [Porting Linux to a new processor architecture, part 3: To the finish line](https://lwn.net/Articles/657939/)
     Gave a ligthning talk at [Kernel Recipes 2015](https://kernel-recipes.org/en/2015/)
     * [Porting Linux to a new processor architecture (slides available)](https://kernel-recipes.org/en/2015/lightning-talks/)
+    Reported at Kernel Recipes for LWN.net:
+    * [Speeding up kernel development with QEMU](https://lwn.net/Articles/660404/)
 
 
 *   #### 2013 - 2015: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
