@@ -9,6 +9,8 @@
     * [Porting Linux to a new processor architecture, part 1: The basics](https://lwn.net/Articles/654783/)
     * [Porting Linux to a new processor architecture, part 2: The early code](https://lwn.net/Articles/656286/)
     * [Porting Linux to a new processor architecture, part 3: To the finish line](https://lwn.net/Articles/657939/)
+    Gave a ligthning talk at [Kernel Recipes 2015](https://kernel-recipes.org/en/2015/)
+    * [Porting Linux to a new processor architecture (slides available)](https://kernel-recipes.org/en/2015/lightning-talks/)
 
 
 *   #### 2013 - 2015: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
