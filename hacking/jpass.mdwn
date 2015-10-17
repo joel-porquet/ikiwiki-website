@@ -6,27 +6,20 @@
 For more information about why this software, you can read about the history of
 it on [[password_management_history]].
 
-![jpass demo](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/plain/docs/demo.gif)
-![jpass-web demo](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/plain/docs/demo.gif)
+# Documentation and source code
 
-# Documentation
-
-You can find the documentation on my cgit website:
+You can find the documentation and the entire source code on my cgit website or
+on GitHub:
 
 * [jpass](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/about/)
 * [jpass-web](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/about/)
 
-# Source code
-
-You can find the entire source code on my cgit website:
-
-* [jpass](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/)
-* [jpass-web](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/)
+* [jpass-github](https://github.com/joel-porquet/jpass)
+* [jpass-web-github](https://github.com/joel-porquet/jpass-web)
 
 # Archlinux packages
 
-I packaged **jpass** and **jpass-web** for ArchLinux.
-Please find the webpage on:
+I packaged **jpass** and **jpass-web** for ArchLinux:
 
 * [jpass](https://aur.archlinux.org/packages/jpass-git)
 * [jpass-web](https://aur.archlinux.org/packages/jpass-web-git)
