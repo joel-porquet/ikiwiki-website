@@ -12,7 +12,6 @@ on GitHub:
 
 # Archlinux packages
 
-I packaged **jinstall** for ArchLinux.
-Please find the webpage on:
+I packaged **jinstall** for ArchLinux:
 
 * [jinstall](https://aur.archlinux.org/packages/jinstall-git)
