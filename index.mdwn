@@ -1,6 +1,8 @@
 [[!meta title="Joël Porquet"]]
 
-*I'm currently available for job opportunities, please contact me*
+I'm currently working as a contractor for [LeafLabs, LLC](http://leaflabs.com/).
+I'm assigned to the [project Ara](http://www.projectara.com/), putting up a
+documentation for third-party module developers.
 
 From 2013 to 2015, I worked as a **Postdoctoral research assistant** at Sorbonne
 University ([Pierre and Marie Curie University](http://www.upmc.fr/en)) within
