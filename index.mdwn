@@ -1,8 +1,9 @@
 [[!meta title="Joël Porquet"]]
 
 I'm currently working as a contractor for [LeafLabs, LLC](http://leaflabs.com/).
-I'm assigned to the [project Ara](http://www.projectara.com/), putting up a
-documentation for third-party module developers.
+I'm working on [Project Ara](http://www.projectara.com/) and am team lead on the
+Firmware Development Kit (FDK) and the Firmware documentation for third-party
+module developers.
 
 Previously, from 2013 to 2015, I worked as a Postdoctoral research engineer at
 Sorbonne University ([Pierre and Marie Curie University](http://www.upmc.fr/en))
