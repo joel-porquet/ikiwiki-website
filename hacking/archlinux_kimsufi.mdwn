@@ -235,13 +235,13 @@ from the local hard disk instead of from the network.
 Exit the chrooted environment by typing `exit` or `Ctrl-D`, and unmount all the
 partitions that you mounted before.
 
-umount /mnt/proc
-umount /mnt/sys
-umount /mnt/dev/pts
-umount /mnt/dev
-umount /mnt/boot
-umount /mnt/var
-umount /mnt
+    # umount /mnt/proc
+    # umount /mnt/sys
+    # umount /mnt/dev/pts
+    # umount /mnt/dev
+    # umount /mnt/boot
+    # umount /mnt/var
+    # umount /mnt
 
 Reboot the server, wait a couple minutes and try to ssh to it again. Hopefully
 it should work and you should get a ssh prompt!
