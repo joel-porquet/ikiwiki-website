@@ -1,0 +1,253 @@
+[[!meta title="Howto install a vanilla ArchLinux on a Kimsufi/OVH server"]]
+[[!tag archlinux ovh kimsufi]]
+
+A few years ago, when I succeeded in installing a vanilla ArchLinux on my
+[kimsufi](http://www.kimsufi.com) (aka the cheap dedicated servers provider by
+OVH) server, I only took a few notes that stayed on my computer and never made
+it to the web.
+
+Now that I just started renting a new more powerful server (Core i3, 8GB ram and
+2To HDD for 20€/month) and that I have to reinstall ArchLinux from scratch, I'm
+taking the time to write a proper article about the procedure. Hopefully it can
+help others (although it seems like lots of other people had got it working and
+already wrote articles about it).
+
+# Boot in rescue mode
+
+The very first step which will make our life easier is to add your public ssh
+key to your kimsufi account so that you can log in directly after booting in
+rescue mode. Go to the online manager, and copy-paste your public key (probably
+`~/.ssh/id_rsa.pub`) on the `SSH keys` web page.
+
+Now configure your server to boot in rescue mode by selecting `Rescue` and
+`rescue-pro` in the `Netboot` menu, and restart.
+
+Wait a couple minutes and everything went well you should be able to ssh your
+server (with user `root`) and get a prompt.
+
+# Prepare the system
+
+For this install, we will assume the hard disk was formatted with GPT. This was
+the default in my case.
+
+With GPT-formatted hard disks, GRUB requires that there is a small (i.e. a
+couple megabytes) special BIOS boot partition. Note that this partition is not
+the `/boot` partition and does not need to be mounted. It's there to hold an
+image that GRUB will create for us later on.
+
+We create a 2-MiB partition (`/dev/sda1`) for the BIOS boot and use a second
+partition managed by LVM for the rest (in case I want to resize my partitions
+later). I did the partitioning with `gdisk` since it's made for GPT and it was
+available on the rescue system. Make sure that the BIOS boot partition has the
+type `0xEF02` and the LVM partition the type `0x8E00`. At the end, my partition
+table looked like:
+
+    # gdisk -l /dev/sda
+    ...
+    Number  Start (sector)    End (sector)  Size       Code  Name
+       1            2048            6143   2.0 MiB     EF02  BIOS boot partition
+       2            6144      3907029134   1.8 TiB     8E00  Linux LVM
+
+On `/dev/sda2`, I created four LVM volumes: `/` (20 GiB), `/var` (20 GiB),
+`/srv` (20 GiB) and `/home` (the rest).
+
+The first command creates a physical volume on `/dev/sda2`. The second command
+creates a volume group name `vg0` on `/dev/sda2`.
+
+    # pvcreate /dev/sda2
+    # vgcreate vg0 /dev/sda2
+
+We can now create our four logical volumes. The first three have a size of 20
+GiB, while the last one gets the remaining free space.
+
+    # lvcreate -L 20G vg0 -n root
+    # lvcreate -L 20G vg0 -n var
+    # lvcreate -L 20G vg0 -n srv
+    # lvcreate -l 100%FREE vg0 -n home
+
+We can check that these logical volumes were properly created with `lvdisplay`
+or at least by checking the content of `/dev/vg0`.
+
+    # ls -1 /dev/vg0
+    home
+    root
+    srv
+    var
+
+The logical volumes can now be formatted with your chosen filesystem. In my
+case, I'm using ext4.
+
+    # mkfs.ext4 /dev/vg0/home
+    # mkfs.ext4 /dev/vg0/root
+    # mkfs.ext4 /dev/vg0/srv
+    # mkfs.ext4 /dev/vg0/var
+
+# Install ArchLinux
+
+The first step in order to install ArchLinux in our newly created root
+filesystem is to mount the logical volumes. To this end, we use the directory
+`/mnt` which already exists on the rescue system.
+
+    # mount /dev/vg0/root /mnt
+    # mkdir /mnt/home
+    # mkdir /mnt/srv
+    # mkdir /mnt/var
+    # mount /dev/vg0/home /mnt/home
+    # mount /dev/vg0/srv /mnt/srv
+    # mount /dev/vg0/var /mnt/var
+
+To install a base ArchLinux system onto our root filesystem, we will use the
+bash script [arch-bootstrap](https://github.com/tokland/arch-bootstrap).
+Download it with `wget` or `curl` and run it.
+
+    # wget https://raw.githubusercontent.com/tokland/arch-bootstrap/master/arch-bootstrap.sh
+    # chmod +x arch-bootstrap.sh
+    # ./arch-bootstrap.sh /mnt
+
+At this point, we have a base ArchLinux system but we're not ready to chroot to
+it yet because most likely the entropy is too low and won't be enough to
+initialize pacman's keyring. To solve this, we need to download the package
+`haveged` ourselves and put it in our new filesystem so we can install it
+manually after chrooting.
+
+    # wget -O /mnt/tmp/haveged.tar.xz https://www.archlinux.org/packages/extra/x86_64/haveged/download/
+
+# Chroot to the new filesystem
+
+Before chrooting, we need to mount a few more things, such as `/dev`, `/proc`,
+etc.
+
+    # mount --bind /proc /mnt/proc
+    # mount --bind /sys /mnt/sys
+    # mount --bind /dev /mnt/dev
+    # mount --bind /dev/pts /mnt/dev/pts
+
+Now, chroot to the new filesystem.
+
+    # chroot /mnt
+
+The next step is to logically initialize pacman's keyring. But before that, we
+need to install the `haveged` package that we have just downloaded and run it to
+accelerate the generation of more entropy.
+
+    # cd /
+    # tar xJf /tmp/haveged.tar.xz
+    # haveged -w 1024
+
+Now initialize pacman's keyring.
+
+    # pacman-key --init
+    # pacman-key --populate archlinux
+
+# Complete the install
+
+Install the `base` and `base-devel` package groups.
+
+    # pacman -S base base-devel
+
+There are a few last steps before we can reboot and get access to our new
+system.
+
+Start by generating an `/etc/fstab` file.
+
+    # pacman -S arch-install-scripts
+    # genfstab / > /etc/fstab
+
+Then, setup your locale by editing `/etc/locale.gen` and running `locale-gen`,
+and indicated your preferred locale in `/etc/locale.conf`.
+
+    # vi /etc/locale.gen
+    ... uncomment required locales ...
+    # locale-gen
+    # echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+The next step is to have our LVM volumes work, especially our root volume. For
+that, you need to edit the file `/etc/mkinitcpio.conf` and add the `lvm2` hook
+in the list of `HOOKS`, exactly between `block` and `filesystem`.
+
+    # cat /etc/mkinitcpio.conf
+    ...
+    HOOKS="base udev autodetect modconf block lvm2 filesystems keyboard fsck"
+    ...
+
+Recreate a new initramfs image so that the LVM hook is generated as part of it.
+
+    # mkinitcpio -p linux
+
+Install a bootloader, for example GRUB.
+
+    # pacman -S grub
+    # grub-install /dev/sda
+    # grub-mkconfig -o /boot/grub/grub.cfg
+
+Now the most difficult step of this whole process is to get the network to work.
+It's a pain and I'm still not sure how it precisely work. The issue is that the
+rescue system presents the Ethernet interface as `eth0` while systemd/udev on
+ArchLinux want a [Predictable Network Interface
+Name](https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/).
+
+At first, I thought that my Ethernet interface would be called `enp0s25` but
+after a few tries with netctl, it didn't work. I ended up switching to
+systemd-networkd (and the matching rule `en*`) which allowed me to access my
+server after reboot and discover that the Ethernet interface was actually named
+`eno1`. Go figure...
+
+Knowing the real interface name, I eventually switched back to netctl and it
+seems to be working.
+
+But basically, what seems to be the simplest way is to enable DHCP through
+systemd-networkd by editing a new file in `/etc/systemd/network/dhcp.network`
+(see content below) and enable the corresponding systemd service.
+
+    # cat /etc/systemd/network/dhcp.network
+    [Match]
+    Name=en*
+    [Network]
+    DHCP=ipv4
+    # systemctl enable systemd-networkd
+
+Once you have successfully rebooted your server with an operational network, you
+can check what the real Ethernet interface is with `ip addr` and 1/ switch back
+to another network manager if you want and 2/ switch to a static IP
+configuration.
+
+Now install `openssh` and enable the SSH daemon so that you can connect to your
+server after rebooting it.
+
+    # pacman -S openssh
+    # systemctl enable sshd
+
+Setup a password for the root account.
+
+    # passwd
+
+And finally, create a user (by default, sshd won't let you log with the root
+user, which would be a bad idea anyway).
+
+    # adduser -m -G wheel,systemd-journal <user>
+    # passwd <user>
+
+# Reboot
+
+The decisive moment has arrived. In the kimsufi manager, setup the boot to be
+from the local hard disk instead of from the network.
+
+Exit the chrooted environment by typing `exit` or `Ctrl-D`, and unmount all the
+partitions that you mounted before.
+
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt/dev/pts
+umount /mnt/dev
+umount /mnt/boot
+umount /mnt/var
+umount /mnt
+
+Reboot the server, wait a couple minutes and try to ssh to it again. Hopefully
+it should work and you should get a ssh prompt!
+
+    # ssh <user>@your-server-ip
+    $
+
+You can now go on with configuring your install properly.
+
