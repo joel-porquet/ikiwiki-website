@@ -1,0 +1,4 @@
+[[!meta title="pages tagged kimsufi"]]
+
+[[!inline pages="tagged(kimsufi)" actions="no" archive="yes"
+feedshow=10]]
