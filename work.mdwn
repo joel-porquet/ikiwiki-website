@@ -1,5 +1,9 @@
 [[!meta title="Resume"]]
 
+# Talks/writing
+
+[[Dedicated page|talks_writing]]
+
 # Professional/research experience
 
 *   #### 2015 - present: LeafLabs, LLC ([LeafLabs](http://www.leaflabs.com/))
@@ -13,18 +17,9 @@
     Took Spanish classes in South-America<br />
     Committed a [few patches](http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=joel+porquet) in the [Linux kernel](http://kernel.org)<br />
 
-    Wrote a series of articles for [LWN.net](https://lwn.net):
-    * [Porting Linux to a new processor architecture, part 1: The basics](https://lwn.net/Articles/654783/)
-    * [Porting Linux to a new processor architecture, part 2: The early code](https://lwn.net/Articles/656286/)
-    * [Porting Linux to a new processor architecture, part 3: To the finish line](https://lwn.net/Articles/657939/)
-
-
-    Gave a ligthning talk at [Kernel Recipes 2015](https://kernel-recipes.org/en/2015/):
-    * [Porting Linux to a new processor architecture (slides available)](https://kernel-recipes.org/en/2015/lightning-talks/)
-
-
-    Reported at [Kernel Recipes 2015](https://kernel-recipes.org/en/2015/) for [LWN.net](https://lwn.net):
-    * [Speeding up kernel development with QEMU](https://lwn.net/Articles/660404/)
+    Wrote articles for [LWN.net](https://lwn.net) and gave a talk at [Kernel
+    Recipes 2015](https://kernel-recipes.org/en/2015/). More on this
+    [[page|talks_writing]].
 
 
 *   #### 2013 - 2015: Sorbonne University ([University of Pierre and Marie Curie](http://www.upmc.fr/en)), Paris, France
@@ -85,24 +80,25 @@
     Specialization in *Architecture and Design of Integrated Systems*<br />
     *First class honours ("mention très bien")*
 
-# Publications
+# Academic publications
 
 [[Dedicated page|publications]]
 
-# Teaching experience
+# Academic teaching experience
 
 [[Dedicated page|teaching]]
 
 # Other
 
-French is my native language, I'm fluent in English and I can almost hold a
-conversation in Spanish.
+French is my native language, I'm fluent in English and at some point in the
+near past, I could almost hold a conversation in Spanish.
 
-In the last couple of years, I really have got into
-[improv](http://en.wikipedia.org/wiki/Improvisational_theatre). I started in
-New York, following two classes at the People's Improv Theater
-([PIT](http://thepit-nyc.com/)). And I'm now a member of the Parisian
-Improvisation League ([LIP](http://www.improparis.com/)).
+In the last few of years, I really have got into
+[improv](http://en.wikipedia.org/wiki/Improvisational_theatre). I started in New
+York, following two classes at the People's Improv Theater
+([PIT](http://thepit-nyc.com/)). Then I became a member of the Parisian
+Improvisation League ([LIP](http://www.improparis.com/)). Back in the US, I am
+now on the look out for a new improv team to join.
 
 Being quite a computer hobbyist, I also continue learning and programming on my
 spare time:
@@ -113,6 +109,6 @@ spare time:
 
 * Between October and December 2014, I followed an
   [online course](https://www.france-universite-numerique-mooc.fr/courses/inria/41001/Trimestre_4_2014/about)
-  about Python.
+  about Python programming.
 
 * I also develop a few [[personal projects|hacking/projects]].

@@ -1,0 +1,39 @@
+[[!meta title="Talks and writing"]]
+
+I like presenting, and as painful as the experience usually is in the moment, I
+also enjoy writing.
+
+# Writing
+
+In the summer of 2015, I wrote a series of articles for
+[LWN.net](https://lwn.net):
+* [Porting Linux to a new processor architecture, part 1: The
+  basics](https://lwn.net/Articles/654783/)
+* [Porting Linux to a new processor architecture, part 2: The early
+  code](https://lwn.net/Articles/656286/)
+* [Porting Linux to a new processor architecture, part 3: To the finish
+  line](https://lwn.net/Articles/657939/)
+
+
+In October 2015, I reported at [Kernel Recipes
+2015](https://kernel-recipes.org/en/2015/) for [LWN.net](https://lwn.net):
+* [Speeding up kernel development with QEMU](https://lwn.net/Articles/660404/)
+
+# Talks
+
+In April 2016, I gave a talk at [Embedded Linux Conference
+2016](http://events.linuxfoundation.org/events/embedded-linux-conference) about
+Porting Linux to a new processor architecture. This talk goes farther then the
+LWN.net articles and the KR'2015 presentation, since I spend some time talking
+about SMP and NUMA support.
+* [Video](https://www.youtube.com/watch?v=2UVX0YPmvOA)
+* [Slides](http://events.linuxfoundation.org/sites/events/files/slides/elc-2016.pdf)
+
+
+In October 2015, I gave a ligthning talk at [Kernel Recipes
+2015](https://kernel-recipes.org/en/2015/) about porting Linux to a new
+processor architecture.
+* [Video](https://www.youtube.com/watch?v=GRMpC0rNGZ8)
+* [Slides](https://kernel-recipes.org/en/2015/lightning-talks/)
+
+

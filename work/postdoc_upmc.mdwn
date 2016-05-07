@@ -8,6 +8,9 @@ ported the Linux kernel to a new processor architecture named TSAR.
 A page description and a poster were [[published|publications]] in 2015 at the
 _conference on Design, Automation and Test in Europe_ (DATE'2015).
 
+I also wrote some [[articles|talks_writing]] on [LWN.net](https://lwn.net) and
+gave a couple of [[talks|talks_writing]] about this experience.
+
 ## The TSAR processor architecture
 
 [TSAR](https://www-soc.lip6.fr/trac/tsar), which stands for Tera-Scale
