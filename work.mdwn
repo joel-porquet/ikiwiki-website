@@ -80,11 +80,11 @@
     Specialization in *Architecture and Design of Integrated Systems*<br />
     *First class honours ("mention très bien")*
 
-# Academic publications
+# Publications
 
 [[Dedicated page|publications]]
 
-# Academic teaching experience
+# Teaching experience
 
 [[Dedicated page|teaching]]
 

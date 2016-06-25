@@ -47,6 +47,11 @@ At the end of my work, the port of Linux was able to support:
   controller (with integrated timer and software interrupts),
 - etc.
 
+Even though, as an academic project, my port has not found its way upstream, I
+still took the opportunity to commit a [few
+patches](http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=joel+porquet)
+in the Linux kernel.
+
 ## Porting other tools
 
 Porting the Linux kernel is usually not sufficient if one wants to run
