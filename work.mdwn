@@ -6,10 +6,19 @@
 
 # Professional/research experience
 
-*   #### 2015 - present: LeafLabs, LLC ([LeafLabs](http://www.leaflabs.com/))
+*   #### 2017: University of California in Davis ([UCD](http://www.cs.ucdavis.edu/))
+    **Lecturer**<br />
+    *Teaching "ECS 150: Operating Systems" during Winter and Spring 2017*<br />
+    *ECS150 is one of the core courses in the undergraduate curriculum and has
+    an attendance of about 200 students per session.*
+
+
+*   #### 2015 - 2016: LeafLabs, LLC ([LeafLabs](http://www.leaflabs.com/))
     **Contractor**<br />
     *Working on the [Project Ara](http://www.projectara.com)*<br />
-    *Team lead on the Firmware Development Kit (FDK) and the Firmware documentation for third-party module developers*
+    *Team lead on the Firmware Development Kit (FDK) and the Firmware
+    documentation for third-party module developers*
+    *Project canceled by Google in September 2016*
 
 
 *   #### 2015:
