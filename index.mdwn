@@ -1,20 +1,26 @@
 [[!meta title="Joël Porquet"]]
 
-I'm currently working as a consultant. My main project is with [LeafLabs,
-LLC](http://leaflabs.com/), working on [Project
-Ara](http://www.projectara.com/). I am team lead on the Firmware Development Kit
-(FDK) and the Firmware documentation for third-party module developers.
+I'm currently a lecturer at [UC Davis](https://www.ucdavis.edu/) where I teach
+*ECS150: Operating Systems and System Programming*.
 
-Previously, from 2013 to 2015, I worked as a Postdoctoral research engineer at
+Previously, from late 2015 to Sep. 2016, I was working as a consultant for
+[LeafLabs, LLC](http://leaflabs.com/), working on [Project
+Ara](http://www.projectara.com/) until the project was discontinued. I was team
+lead on the Firmware Development Kit (FDK) and the Firmware documentation for
+third-party module developers.
+
+Before that, from 2013 to 2015, I worked as a Postdoctoral research engineer at
 Sorbonne University ([Pierre and Marie Curie University](http://www.upmc.fr/en))
 where I [[ported Linux|work/postdoc_upmc]] to a new processor architecture.
 
 More about my [[resume|work]] (also on
 [LinkedIn](https://www.linkedin.com/in/joelporquet)).
 
-You can contact me at `joel.porquet@gmail.com` or `joel@porquet.org`.
+You can contact me at `joel.porquet@gmail.com` or `joel@porquet.org`. If you are
+a student at UC Davis, please contact me at `jporquet@ucdavis.edu`.
 
 Otherwise, you can just enjoy browsing this website using the navigation bar
 above. In addition to being classified into primary categories, most of the
 pages are also accessible through [[tags]] and there is a [[timeline]] that
 shows the most recently created/modified pages.
+
