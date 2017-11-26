@@ -10,4 +10,4 @@ Its design relies on [bootstrap](http://getbootstrap.com/) that in turn uses
 awesome](http://fontawesome.io/).
 
 Its source code is available via
-[git/cgit](https://joel.porquet.org/cgit/cgit.cgi/wiki.git/).
+[github](https://github.com/joel-porquet/ikiwiki-website).

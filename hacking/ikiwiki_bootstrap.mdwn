@@ -238,5 +238,5 @@ new design!
 Try to enable `html5` generation in your wiki setup file, which should even
 better enhance bootstrap support (e.g. displaying "Search" in the search form).
 
-You can check my [cgit](https://joel.porquet.org/cgit/cgit.cgi/wiki.git/) and
+You can check my [github](https://github.com/joel-porquet/ikiwiki-website) and
 have a look at my templates, css files, etc.

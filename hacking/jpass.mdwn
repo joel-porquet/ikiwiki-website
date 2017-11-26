@@ -8,14 +8,10 @@ it on [[password_management_history]].
 
 # Documentation and source code
 
-You can find the documentation and the entire source code on my cgit website or
-on GitHub:
+You can find the documentation and the entire source code on GitHub:
 
-* [jpass](https://joel.porquet.org/cgit/cgit.cgi/jpass.git/about/)
-* [jpass-web](https://joel.porquet.org/cgit/cgit.cgi/jpass-web.git/about/)
-
-* [jpass-github](https://github.com/joel-porquet/jpass)
-* [jpass-web-github](https://github.com/joel-porquet/jpass-web)
+* [jpass](https://github.com/joel-porquet/jpass)
+* [jpass-web](https://github.com/joel-porquet/jpass-web)
 
 # Archlinux packages
 

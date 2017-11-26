@@ -102,7 +102,7 @@ Now you can use when listing todo pages:
 ## Source code
 
 The code of the plugin can be found here:
-<https://joel.porquet.org/cgit/cgit.cgi/iki-resources.git/tree/IkiWiki/Plugin/todo.pm>
+<https://github.com/joel-porquet/ikiwiki-resources/blob/master/IkiWiki/Plugin/todo.pm>
 
 The code of a possible template can be found here:
-<https://joel.porquet.org/cgit/cgit.cgi/iki-resources.git/tree/templates/todopage.tmpl>
+<https://github.com/joel-porquet/ikiwiki-resources/blob/master/templates/todopage.tmpl>
